@@ -671,6 +671,7 @@ body.no-scroll{
   letter-spacing: -0.03em;
   line-height: 0.98;
   margin: 0 0 18px;
+  white-space: nowrap;
 }
 
 .contact-subtitle{
