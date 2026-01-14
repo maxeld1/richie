@@ -1,70 +1,72 @@
 // /js/main.js
-(() => {
+(function () {
   function wireMenu() {
     const btn = document.querySelector(".header-menu");
     const menu = document.getElementById("mobile-menu");
+
     if (!btn || !menu) return;
 
-    // Prevent double-binding if wireMenu runs multiple times
+    // Avoid double-binding if this runs multiple times
     if (btn.dataset.wired === "true") return;
     btn.dataset.wired = "true";
 
     const open = () => {
       btn.setAttribute("aria-expanded", "true");
-      menu.hidden = false;
-      menu.classList.add("is-open");
-      document.documentElement.classList.add("no-scroll");
+      btn.setAttribute("aria-label", "Close menu");
+
+      menu.hidden = false;                 // allow it to render
+      menu.classList.add("is-open");       // CSS anim state
       document.body.classList.add("no-scroll");
     };
 
     const close = () => {
       btn.setAttribute("aria-expanded", "false");
-      menu.classList.remove("is-open");
-      menu.hidden = true;
-      document.documentElement.classList.remove("no-scroll");
-      document.body.classList.remove("no-scroll");
-    };
+      btn.setAttribute("aria-label", "Open menu");
 
-    const toggle = () => {
-      const isOpen = btn.getAttribute("aria-expanded") === "true";
-      isOpen ? close() : open();
+      menu.classList.remove("is-open");
+      // wait for CSS fade to finish, then hide
+      window.setTimeout(() => {
+        if (btn.getAttribute("aria-expanded") === "false") {
+          menu.hidden = true;
+        }
+      }, 200);
+
+      document.body.classList.remove("no-scroll");
     };
 
     // Start closed
     close();
 
-    // Toggle on button click
     btn.addEventListener("click", (e) => {
       e.preventDefault();
-      e.stopPropagation(); // important if you also close on outside click
-      toggle();
+      const isOpen = btn.getAttribute("aria-expanded") === "true";
+      isOpen ? close() : open();
     });
 
-    // Click inside menu should NOT close unless it's a link
+    // Close when clicking a link
     menu.addEventListener("click", (e) => {
-      const link = e.target.closest("a");
-      if (link) close();
-      e.stopPropagation();
+      if (e.target.closest("a")) close();
     });
 
-    // Click outside closes
-    document.addEventListener("click", () => {
-      if (btn.getAttribute("aria-expanded") === "true") close();
-    });
-
-    // ESC closes
+    // ESC to close
     window.addEventListener("keydown", (e) => {
       if (e.key === "Escape") close();
     });
+
+    // Click outside menu to close (optional)
+    document.addEventListener("click", (e) => {
+      const isOpen = btn.getAttribute("aria-expanded") === "true";
+      if (!isOpen) return;
+      if (e.target.closest("#mobile-menu") || e.target.closest(".header-menu")) return;
+      close();
+    });
   }
 
-  // Works with partial injection:
-  // - run once on DOM ready
-  // - then retry a few times while header is being injected
+  // Works with injected partials: try a few times
   document.addEventListener("DOMContentLoaded", () => {
     wireMenu();
     setTimeout(wireMenu, 50);
-    setTimeout(wireMenu, 200);
-    setTimeout(wireMenu, 500);
+    setTimeout(wireMenu, 250);
+    setTimeout(wireMenu, 600);
   });
 })();

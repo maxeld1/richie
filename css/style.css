@@ -124,19 +124,19 @@ h3{ font-size: 1.25rem; font-weight: 700; }
   line-height: 1;
 }
 
-/* Swap label when open */
-.header-menu[aria-expanded="true"] .menu-text{
-  visibility: hidden;
-  position: relative;
-}
+/*!* Swap label when open *!*/
+/*.header-menu[aria-expanded="true"] .menu-text{*/
+/*  visibility: hidden;*/
+/*  position: relative;*/
+/*}*/
 
-.header-menu[aria-expanded="true"] .menu-text::after{
-  content: "X";
-  visibility: visible;
-  position: absolute;
-  left: 0;
-  top: 0;
-}
+/*.header-menu[aria-expanded="true"] .menu-text::after{*/
+/*  content: "X";*/
+/*  visibility: visible;*/
+/*  position: absolute;*/
+/*  left: 0;*/
+/*  top: 0;*/
+/*}*/
 
 .menu-text {
   font-size: 20px;
