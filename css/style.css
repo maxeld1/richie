@@ -555,6 +555,18 @@ body.no-scroll{
   height: 26px;
 }
 
+.linkedin-icon {
+  width: 22px;
+  height: 22px;
+  color: #0A66C2; /* LinkedIn blue */
+  transition: transform .18s ease, opacity .18s ease;
+}
+
+.footer-social a:hover .linkedin-icon {
+  transform: translateY(-1px);
+  opacity: .9;
+}
+
 .footer-location{
   color:#fff;
   font-weight: 700;
