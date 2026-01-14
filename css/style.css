@@ -94,7 +94,7 @@ h3{ font-size: 1.25rem; font-weight: 700; }
   position: fixed;
   top:0; left:0; right:0;
   z-index: 3000;
-  background: var(--green);
+  background: var(--bg);
   border-top: 8px solid var(--purple);
 }
 
