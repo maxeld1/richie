@@ -864,6 +864,17 @@ body.no-scroll{
   display: block;
 }
 
+
+.page-portfolio .wrap{
+  width: min(1400px, calc(100% - 96px));
+}
+
+@media (max-width: 768px){
+  .page-portfolio .wrap{
+    width: min(100%, calc(100% - 40px));
+  }
+}
+
 /* Responsive */
 @media (max-width: 980px){
   .portfolio-grid{
