@@ -455,6 +455,33 @@ footer .container{
   }
 }
 
+#mobile-menu.site-nav{
+  background: var(--green);
+  border-bottom: 1px solid rgba(255,255,255,.18);
+  padding: 14px 48px 18px;
+}
+
+#mobile-menu.site-nav[hidden]{ display: none !important; }
+
+#mobile-menu.site-nav ul{
+  display:flex;
+  gap: 20px;
+}
+#mobile-menu.site-nav a{
+  color:#fff;
+  font-weight:800;
+  opacity:.92;
+}
+#mobile-menu.site-nav a:hover{ opacity:1; }
+
+@media (max-width:768px){
+  #mobile-menu.site-nav ul{
+    display:grid;
+    gap:10px;
+    padding:0;
+  }
+}
+
 /* -------------------- Helpers -------------------- */
 .desktop-only{ display:inline-flex; }
 .mobile-only{ display:none; }
