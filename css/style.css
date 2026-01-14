@@ -124,15 +124,6 @@ h3{ font-size: 1.25rem; font-weight: 700; }
   line-height: 1;
 }
 
-/* Menu button (Menu + + icon) */
-.header-menu{
-  background: transparent;
-  border: 0;
-  color: #fff;
-  font-weight: 800;
-  cursor: pointer;
-}
-
 /* Swap label when open */
 .header-menu[aria-expanded="true"] .menu-text{
   visibility: hidden;
@@ -147,16 +138,32 @@ h3{ font-size: 1.25rem; font-weight: 700; }
   top: 0;
 }
 
-.menu-x{
-  font-size: 44px;
-  line-height: 1;
-  display: inline-block;
-  transform: rotate(0deg);
-  transition: transform .22s var(--ease);
+/* keep header above the panel */
+.site-header{ z-index: 5000; }     /* higher than the menu */
+#mobile-menu.site-nav{ z-index: 4000; }  /* menu under header */
+
+/* Menu button text swap */
+.header-menu{
+  position: relative;
+  z-index: 6000; /* above everything */
+  font-weight: 800;
+  font-size: 16px;
+  color: #fff;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
 }
 
-.header-menu[aria-expanded="true"] .menu-x{
-  transform: rotate(45deg); /* plus -> X */
+/* default label */
+.header-menu .menu-text::before{
+  content: "Menu";
+}
+
+/* when open, show X */
+.header-menu[aria-expanded="true"] .menu-text::before{
+  content: "X";
+  font-size: 22px;          /* make it feel like an icon */
+  line-height: 1;
 }
 
 .menu-label {
