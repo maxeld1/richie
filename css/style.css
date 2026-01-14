@@ -289,11 +289,11 @@ body.no-scroll{
   align-items: center;
   justify-content: center;
 
-  background: rgba(0,0,0,.45);
+  background: none;
   color: #fff;
 
   font-size: 42px; /* ⬅ controls arrow size */
-  line-height: 1;
+  line-height: 1.5;
 
   border: 0;
   border-radius: 50%;
