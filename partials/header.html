@@ -1,47 +1,124 @@
-<!-- /partials/header.html -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
-<!--Libre Franklin-->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <title>Richie Izzo — Portfolio</title>
+  <meta name="description" content="Portfolio of Richie Izzo featuring selected work, projects, and contact info." />
+  <link rel="canonical" href="https://www.richieizzo.com/" />
 
-<!--Markazi Text-->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400..700&display=swap" rel="stylesheet">
+  <!-- Use relative paths (no leading /) -->
+  <link rel="icon" href="assets/icons/favicon.ico" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="css/style.css" />
 
-<!--Merriweather-->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap" rel="stylesheet">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Richie Izzo — Portfolio" />
+  <meta property="og:description" content="Work, projects, and creative pieces by Richie Izzo." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.richieizzo.com/" />
+  <meta property="og:image" content="assets/images/og-image.jpg" />
 
-<!--Scheherazade New-->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Richie Izzo — Portfolio" />
+  <meta name="twitter:description" content="Work, projects, and creative pieces by Richie Izzo." />
+  <meta name="twitter:image" content="assets/images/og-image.jpg" />
 
-<header class="site-header">
-  <div class="header-inner">
-    <a class="header-title" href="{{P}}index.html">Richie Izzo</a>
+  <!-- Structured data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Richie Izzo",
+      "url": "https://www.richieizzo.com/",
+      "sameAs": [
+        "https://instagram.com/richie.izzo"
+      ]
+    }
+  </script>
+</head>
 
-    <button class="header-menu"
-            aria-expanded="false"
-            aria-controls="mobile-menu"
-            aria-label="Toggle menu">
-      Menu
-    </button>
-  </div>
+<body>
 
-  <!-- keep your existing menu if you want it to slide down -->
-  <nav id="mobile-menu" class="site-nav">
-    <ul>
-      <li><a href="{{P}}pages/services.html">Me</a></li>
-      <li><a href="{{P}}pages/stylists.html">Portfolio</a></li>
-      <li><a href="{{P}}pages/contact.html">Contact</a></li>
-    </ul>
-  </nav>
-</header>
+<!-- Header partial -->
+<div data-include="header"></div>
 
+<main>
+
+  <!-- HERO -->
+  <section class="hero" aria-label="Featured work">
+    <div class="hero-slide">
+      <img
+              src="assets/images/hero-1.jpg"
+              alt="Featured work by Richie Izzo"
+              loading="eager"
+      />
+    </div>
+
+    <!-- dots (static for now; hook up later if you add slider JS) -->
+    <div class="hero-dots" aria-hidden="true">
+      <span class="dot"></span>
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+
+    <!-- arrows (static for now; hook up later if you add slider JS) -->
+    <button class="hero-arrow left" type="button" aria-label="Previous slide">‹</button>
+    <button class="hero-arrow right" type="button" aria-label="Next slide">›</button>
+  </section>
+
+  <!-- INTRO + WORK GRID -->
+  <section class="intro" id="work" aria-labelledby="intro-title">
+    <div class="wrap">
+      <h1 id="intro-title">Hello.</h1>
+      <p class="lead">Here are some things I made.</p>
+
+      <div class="gallery" aria-label="Work gallery">
+        <!-- Replace href targets with real project pages when ready -->
+        <a class="tile" href="pages/work/project-1.html">
+          <img src="assets/images/work-1.jpg" alt="Project 1 — short description" loading="lazy" />
+        </a>
+
+        <a class="tile" href="pages/work/project-2.html">
+          <img src="assets/images/work-2.jpg" alt="Project 2 — short description" loading="lazy" />
+        </a>
+
+        <a class="tile" href="pages/work/project-3.html">
+          <img src="assets/images/work-3.jpg" alt="Project 3 — short description" loading="lazy" />
+        </a>
+
+        <a class="tile" href="pages/work/project-4.html">
+          <img src="assets/images/work-4.jpg" alt="Project 4 — short description" loading="lazy" />
+        </a>
+
+        <a class="tile" href="pages/work/project-5.html">
+          <img src="assets/images/work-5.jpg" alt="Project 5 — short description" loading="lazy" />
+        </a>
+
+        <a class="tile" href="pages/work/project-6.html">
+          <img src="assets/images/work-6.jpg" alt="Project 6 — short description" loading="lazy" />
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer partial -->
+<div data-include="footer"></div>
+
+<!-- Scripts -->
+<script src="js/partials.js"></script>
+<script src="js/main.js"></script>
+
+<!-- Safe year setter -->
+<script>
+  const y = document.getElementById("year");
+  if (y) y.textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
