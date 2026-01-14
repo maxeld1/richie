@@ -481,6 +481,11 @@ body.no-scroll{
   background: rgba(255,255,255,.08);
 }
 
+.about-btn{
+  margin-top: 28px;   /* increase as needed */
+  display: inline-block;
+}
+
 /* -------------------- 10) Cards -------------------- */
 .card{
   background: #111;
