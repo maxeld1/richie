@@ -22,9 +22,12 @@
     if (btn.dataset.bound === "1") return;
     btn.dataset.bound = "1";
 
+    const label = btn.querySelector(".menu-label");
+
     const open = () => {
       btn.setAttribute("aria-expanded", "true");
       btn.setAttribute("aria-label", "Close menu");
+      if (label) label.textContent = "X";
       menu.hidden = false;
       menu.classList.add("is-open");
       lockScroll(true);
@@ -33,6 +36,7 @@
     const close = () => {
       btn.setAttribute("aria-expanded", "false");
       btn.setAttribute("aria-label", "Open menu");
+      if (label) label.textContent = "Menu";
       menu.classList.remove("is-open");
       menu.hidden = true;
       lockScroll(false);

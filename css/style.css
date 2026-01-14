@@ -144,35 +144,29 @@ h3{ font-size: 1.25rem; font-weight: 700; }
   .menu-label{ display: none; }
 }
 
-/* -------------------- 4) Fullscreen Overlay Menu -------------------- */
-/* scroll lock while menu open */
+/* -------------------- Drawer Menu (Half Page) -------------------- */
 html.no-scroll,
 body.no-scroll{
   overflow: hidden !important;
 }
 
-/*
-  Important: nav has the [hidden] attribute in HTML.
-  By default hidden => display:none and breaks animation.
-  So we override it and use opacity/pointer-events instead.
-*/
+/* Backdrop */
 #mobile-menu.site-nav{
   position: fixed;
   inset: 0;
-  z-index: 4000; /* above header */
+  z-index: 4000;
 
-  background: var(--green);
-  display: grid;
-  place-items: center;
+  /* backdrop */
+  background: rgba(0,0,0,.35);
 
   opacity: 0;
   pointer-events: none;
   transition: opacity .22s var(--ease);
 }
 
-/* keep layout alive even when hidden */
+/* keep nav alive even with hidden attribute */
 #mobile-menu.site-nav[hidden]{
-  display: grid !important;
+  display: block !important;
 }
 
 /* open state */
@@ -181,24 +175,57 @@ body.no-scroll{
   pointer-events: auto;
 }
 
-/* big centered links */
+/* The actual drawer panel */
+#mobile-menu.site-nav::before{
+  content:"";
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(50vw, 520px);     /* half page, capped */
+  background: var(--green);
+  transform: translateX(100%);
+  transition: transform .28s var(--ease);
+}
+
+#mobile-menu.site-nav.is-open::before{
+  transform: translateX(0);
+}
+
+/* Put the links inside the drawer */
 #mobile-menu.site-nav ul{
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(50vw, 520px);
+
   display: grid;
-  gap: 34px;
-  text-align: center;
+  align-content: center;
+  gap: 28px;
+
+  padding: 0 48px;
+  margin: 0;
+  text-align: left;
 }
 
 #mobile-menu.site-nav a{
+  color: #fff;
   font-family: var(--sans);
   font-weight: 900;
-  font-size: clamp(2.6rem, 6vw, 4.2rem);
+  font-size: clamp(2.2rem, 4.2vw, 3.2rem);
   line-height: 1;
-  color: #fff;
 }
 
-/* subtle hover */
-#mobile-menu.site-nav a:hover{
-  opacity: .9;
+#mobile-menu.site-nav a:hover{ opacity: .9; }
+
+/* Mobile: drawer becomes ~80% width */
+@media (max-width:768px){
+  #mobile-menu.site-nav::before,
+  #mobile-menu.site-nav ul{
+    width: 82vw;
+    padding: 0 22px;
+  }
 }
 
 /* -------------------- 5) Hero -------------------- */
@@ -248,35 +275,43 @@ body.no-scroll{
   font-weight: 600;
 }
 
-/* -------------------- 7) Gallery -------------------- */
+/* -------------------- Gallery (edge-to-edge squares) -------------------- */
 .gallery{
   margin-top: 28px;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;                 /* edge-to-edge */
 }
+
 @media (max-width:900px){
-  .gallery{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .gallery{ grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width:560px){
   .gallery{ grid-template-columns: 1fr; }
 }
 
+/* square tiles */
 .tile{
   display: block;
+  position: relative;
   overflow: hidden;
   background: #111;
-  border: 1px solid rgba(255,255,255,.08);
 }
 
+/* modern square method */
+.tile{ aspect-ratio: 1 / 1; }
+
 .tile img{
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: 260px;
+  height: 100%;
   object-fit: cover;
   display: block;
   transform: scale(1);
   transition: transform .25s var(--ease);
 }
+
 .tile:hover img{ transform: scale(1.03); }
 
 /* -------------------- 8) Buttons -------------------- */
