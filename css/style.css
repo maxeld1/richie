@@ -637,7 +637,7 @@ body.no-scroll{
 }
 
 .footer-bottom{
-  align-content: center;
+  align-items: center;
 }
 
 /* -------------------- 12) Utilities -------------------- */
