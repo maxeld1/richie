@@ -537,6 +537,7 @@ body.no-scroll{ overflow: hidden !important; }
   grid-template-columns: 240px 1fr;
   gap: 36px;
   align-items: start;
+  white-space: nowrap;
 }
 
 .edu-meta{
