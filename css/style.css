@@ -839,7 +839,7 @@ body.no-scroll{ overflow: hidden !important; }
   outline: none;
   padding: 14px 14px;
   font-size: 1rem;
-  font-family: var(--sans);
+  font-family: Futura, serif;
 }
 
 .textarea{
@@ -859,7 +859,7 @@ body.no-scroll{ overflow: hidden !important; }
   background: var(--green);
   color: #fff;
   font-weight: 900;
-  font-family: var(--sans);
+  font-family: Futura, serif;
   cursor: pointer;
   transition: transform .15s var(--ease), opacity .15s var(--ease);
 }
@@ -867,6 +867,45 @@ body.no-scroll{ overflow: hidden !important; }
 .contact-submit:hover{
   transform: translateY(-1px);
   opacity: .95;
+}
+
+/* ===============================
+   Contact page – mobile scale down
+=============================== */
+@media (max-width: 520px){
+  .contact-page{
+    font-size: 0.92rem; /* global scale */
+  }
+
+  .contact-title{
+    font-size: clamp(2.2rem, 10vw, 3rem);
+    margin-bottom: 14px;
+  }
+
+  .contact-subtitle{
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+  }
+
+  .contact-note{
+    font-size: 0.95rem;
+    line-height: 1.45;
+  }
+
+  .contact-form{
+    gap: 18px;
+  }
+
+  .input,
+  .textarea{
+    padding: 12px;
+    font-size: 0.95rem;
+  }
+
+  .contact-submit{
+    padding: 12px 16px;
+    font-size: 0.95rem;
+  }
 }
 
 /* Responsive */
