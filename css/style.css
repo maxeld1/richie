@@ -11,7 +11,7 @@
 
   /* Page */
   --bg: #000;
-  --panel: #0f0f0f;
+  --panel: #000;
   --text: #fff;
   --muted: rgba(255,255,255,.75);
   --line: rgba(255,255,255,.18);
