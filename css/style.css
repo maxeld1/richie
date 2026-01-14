@@ -221,6 +221,7 @@ header:not(.site-header) .menu-icon .line{
   padding: 0;
   margin: 0;
   background: transparent;
+  height: 500px;
 }
 
 /* If you have a hero image element, use these helpers */
