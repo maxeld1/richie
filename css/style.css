@@ -636,6 +636,10 @@ body.no-scroll{
   opacity: .95;
 }
 
+.footer-bottom{
+  align-content: center;
+}
+
 /* -------------------- 12) Utilities -------------------- */
 .desktop-only{ display: inline-flex; }
 .mobile-only{ display: none; }
