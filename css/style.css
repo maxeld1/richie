@@ -124,19 +124,19 @@ h3{ font-size: 1.25rem; font-weight: 700; }
   line-height: 1;
 }
 
-/* Swap label when open */
-.header-menu[aria-expanded="true"] .menu-text{
-  visibility: hidden;
-  position: relative;
-}
+/*!* Swap label when open *!*/
+/*.header-menu[aria-expanded="true"] .menu-text{*/
+/*  visibility: hidden;*/
+/*  position: relative;*/
+/*}*/
 
-.header-menu[aria-expanded="true"] .menu-text::after{
-  content: "X";
-  visibility: visible;
-  position: absolute;
-  left: 0;
-  top: 0;
-}
+/*.header-menu[aria-expanded="true"] .menu-text::after{*/
+/*  content: "X";*/
+/*  visibility: visible;*/
+/*  position: absolute;*/
+/*  left: 0;*/
+/*  top: 0;*/
+/*}*/
 
 .menu-text {
   font-size: 20px;
@@ -149,19 +149,55 @@ h3{ font-size: 1.25rem; font-weight: 700; }
 /* Menu button text swap */
 .header-menu{
   position: relative;
-  z-index: 6000; /* above everything */
+  width: 72px;            /* fixed width prevents shifting */
+  height: 40px;           /* fixed height */
+  background: none;
+  border: 0;
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: var(--sans);
   font-weight: 800;
   font-size: 16px;
   color: #fff;
-  background: transparent;
-  border: 0;
-  cursor: pointer;
 }
 
-/* When open, hide the word and show X */
-.header-menu[aria-expanded="true"] .menu-text{
-  font-size: 22px;
-  line-height: 1;
+/* Shared text styles */
+.menu-text{
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition:
+          opacity .2s var(--ease),
+          transform .25s var(--ease);
+}
+
+/* Default state */
+.menu-open{
+  opacity: 1;
+  transform: scale(1);
+}
+
+.menu-close{
+  opacity: 0;
+  transform: rotate(-90deg) scale(.6);
+}
+
+/* OPEN state */
+.header-menu[aria-expanded="true"] .menu-open{
+  opacity: 0;
+  transform: scale(.6);
+}
+
+.header-menu[aria-expanded="true"] .menu-close{
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
 }
 
 .menu-label {
