@@ -146,6 +146,17 @@ h3{ font-size: 1.25rem; font-weight: 700; }
 .site-header{ z-index: 5000; }     /* higher than the menu */
 #mobile-menu.site-nav{ z-index: 4000; }  /* menu under header */
 
+/* Ensure the backdrop doesn't sit on top of the header click area */
+#mobile-menu.site-nav{
+  top: var(--header-h);
+}
+
+@media (max-width:768px){
+  #mobile-menu.site-nav{
+    top: var(--header-h-mobile);
+  }
+}
+
 /* Menu button text swap */
 .header-menu{
   position: relative;
