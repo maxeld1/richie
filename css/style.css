@@ -461,7 +461,7 @@ footer .container{
   padding: 14px 48px 18px;
 }
 
-#mobile-menu.site-nav[hidden]{ display: none !important; }
+/*#mobile-menu.site-nav[hidden]{ display: none !important; }*/
 
 #mobile-menu.site-nav ul{
   display:flex;
