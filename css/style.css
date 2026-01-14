@@ -637,7 +637,20 @@ body.no-scroll{
 }
 
 .footer-bottom{
+  padding: 28px 0 0;
+  text-align: center;
+}
+
+.footer-bottom-inner{
+  display: flex;
+  justify-content: center;
   align-items: center;
+}
+
+.footer-bottom span{
+  color: rgba(255,255,255,.85);
+  font-weight: 700;
+  font-size: 13px;
 }
 
 /* -------------------- 12) Utilities -------------------- */
