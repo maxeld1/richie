@@ -544,6 +544,11 @@ body.no-scroll{
   transform: translateY(-1px);
 }
 
+.hero-social .footer-icon {
+  width: 22px;
+  height: 22px;
+}
+
 .footer-location{
   color:#fff;
   font-weight: 700;
