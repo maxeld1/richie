@@ -211,7 +211,6 @@ body.no-scroll{
   overflow: hidden !important;
 }
 
-/* -------------------- Drawer Menu (Half Page) -------------------- */
 .site-header{ z-index: 5000; }       /* header stays clickable */
 #mobile-menu.site-nav{ z-index: 4000; }
 
@@ -532,6 +531,24 @@ body.no-scroll{ overflow: hidden !important; }
   padding: 120px 0;
   text-align: center;
 }
+
+/* ----- Me page: Education block mobile fix ----- */
+@media (max-width: 700px){
+  .edu-row{
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+
+  .edu-row .edu-meta{
+    /* keeps the left info readable */
+    max-width: 100%;
+  }
+
+  .edu-row .edu-highlights{
+    text-align: left !important;
+  }
+}
+
 
 /* -------------------- 9) Buttons -------------------- */
 .btn{
