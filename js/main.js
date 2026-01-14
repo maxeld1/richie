@@ -1,79 +1,84 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const btn = document.querySelector(".header-menu");
-  const menu = document.getElementById("mobile-menu");
+// /js/main.js
+(() => {
+  "use strict";
 
-  if (!btn || !menu) return;
+  function setYear() {
+    const y = document.getElementById("year");
+    if (y) y.textContent = new Date().getFullYear();
+  }
 
-  // ensure initial state is closed
-  btn.setAttribute("aria-expanded", "false");
-  menu.classList.remove("is-open");
-  menu.hidden = true;
+  function lockScroll(lock) {
+    document.documentElement.classList.toggle("no-scroll", lock);
+    document.body.classList.toggle("no-scroll", lock);
+  }
 
-  btn.addEventListener("click", () => {
-    const isOpen = btn.getAttribute("aria-expanded") === "true";
-    btn.setAttribute("aria-expanded", String(!isOpen));
+  function initMenu() {
+    const btn = document.querySelector(".header-menu");
+    const menu = document.getElementById("mobile-menu");
 
-    menu.hidden = isOpen;              // accessibility
-    menu.classList.toggle("is-open");  // your CSS uses this
-  });
+    if (!btn || !menu) return;
 
-  // optional: close menu when clicking a link
-  menu.addEventListener("click", (e) => {
-    const link = e.target.closest("a");
-    if (!link) return;
+    // Prevent double-binding if initMenu gets called again
+    if (btn.dataset.bound === "1") return;
+    btn.dataset.bound = "1";
 
+    const open = () => {
+      btn.setAttribute("aria-expanded", "true");
+      btn.setAttribute("aria-label", "Close menu");
+      menu.hidden = false;
+      menu.classList.add("is-open");
+      lockScroll(true);
+    };
+
+    const close = () => {
+      btn.setAttribute("aria-expanded", "false");
+      btn.setAttribute("aria-label", "Open menu");
+      menu.classList.remove("is-open");
+      menu.hidden = true;
+      lockScroll(false);
+    };
+
+    const toggle = () => {
+      const isOpen = btn.getAttribute("aria-expanded") === "true";
+      isOpen ? close() : open();
+    };
+
+    // Initial state
     btn.setAttribute("aria-expanded", "false");
-    menu.hidden = true;
-    menu.classList.remove("is-open");
-  });
-});
+    if (!btn.getAttribute("aria-label")) btn.setAttribute("aria-label", "Open menu");
+    close();
 
-function wireMenu() {
-  const btn = document.querySelector(".header-menu");
-  const menu = document.getElementById("mobile-menu");
-  if (!btn || !menu) return;
+    // Events
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      toggle();
+    });
 
-  const open = () => {
-    btn.setAttribute("aria-expanded", "true");
-    btn.setAttribute("aria-label", "Close menu");
-    menu.hidden = false;
-    menu.classList.add("is-open");
-    document.documentElement.classList.add("no-scroll");
-    document.body.classList.add("no-scroll");
-  };
+    // Close if user clicks a link
+    menu.addEventListener("click", (e) => {
+      if (e.target.closest("a")) close();
+    });
 
-  const close = () => {
-    btn.setAttribute("aria-expanded", "false");
-    btn.setAttribute("aria-label", "Open menu");
-    menu.classList.remove("is-open");
-    menu.hidden = true;
-    document.documentElement.classList.remove("no-scroll");
-    document.body.classList.remove("no-scroll");
-  };
+    // Close on ESC
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") close();
+    });
 
-  // Ensure clean state
-  close();
+    // Optional: close if user clicks outside the menu content
+    menu.addEventListener("click", (e) => {
+      // If menu is a full-screen overlay, clicking empty area closes
+      if (e.target === menu) close();
+    });
+  }
 
-  btn.addEventListener("click", () => {
-    const isOpen = btn.getAttribute("aria-expanded") === "true";
-    isOpen ? close() : open();
-  });
+  function initAll() {
+    setYear();
+    initMenu();
+  }
 
-  // Close on link click
-  menu.addEventListener("click", (e) => {
-    if (e.target.closest("a")) close();
-  });
+  // Run after regular DOM load (for pages without partials)
+  document.addEventListener("DOMContentLoaded", initAll);
 
-  // Close on ESC
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") close();
-  });
-}
-
-// Works even if header is injected after DOMContentLoaded
-document.addEventListener("DOMContentLoaded", () => {
-  wireMenu();
-  // In case partials load after:
-  setTimeout(wireMenu, 50);
-  setTimeout(wireMenu, 250);
-});
+  // Run after partials are injected (this is the important one)
+  document.addEventListener("partials:loaded", initAll);
+})();

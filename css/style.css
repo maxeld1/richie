@@ -1,53 +1,47 @@
 /* ==========================================================
-   Portfolio / Wix-style Revamp (Green header, black body)
-   Designed to replace the "Industry Salon" theme completely.
+   Richie Izzo — Wix-style Portfolio Theme
+   Green header/footer, black body, fullscreen overlay menu
 ========================================================== */
 
-/* -------------------- Tokens -------------------- */
+/* -------------------- 1) Tokens -------------------- */
 :root{
-  /* Brand */
   --green: #305414;
-  --purple: #7a1d7e;
 
-  /* Page */
   --bg: #000;
-  --panel: #000000;
+  --panel: #000;
   --text: #fff;
   --muted: rgba(255,255,255,.75);
-  --line: rgba(255,255,255,.18);
+  --line: rgba(255,255,255,.28);
 
-  /* Layout */
   --maxw: 1200px;
   --header-h: 74px;
   --header-h-mobile: 64px;
 
-  /* Type */
   --sans: "Libre Franklin", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   --serif: "Tinos", Georgia, "Times New Roman", serif;
 
-  /* Motion */
   --ease: cubic-bezier(.16,1,.3,1);
 }
 
-/* -------------------- Reset / Base -------------------- */
+/* -------------------- 2) Base / Reset -------------------- */
 *{ box-sizing: border-box; }
 
-html, body{ height:100%; }
+html, body{ height: 100%; }
+
 html{
   background: var(--bg);
   font-size: 18px;
 }
 
 body{
-  margin:0;
-  padding:0;
-  font-family: var(--sans);
-  color: var(--text);
+  margin: 0;
   background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  overflow-x:hidden;
+  overflow-x: hidden;
 }
 
 /* Make room for fixed header */
@@ -56,13 +50,16 @@ body{ padding-top: var(--header-h); }
   body{ padding-top: var(--header-h-mobile); }
 }
 
+/* Links / type */
 a{ color: inherit; text-decoration: none; }
-p{ margin:0 0 1rem; color: var(--muted); }
-ul{ margin:0; padding:0; list-style:none; }
+a:hover{ text-decoration: none; }
 
-/* Headings match Wix feel */
+p{ margin: 0 0 1rem; color: var(--muted); }
+
+ul{ margin: 0; padding: 0; list-style: none; }
+
 h1,h2,h3,h4,h5,h6{
-  margin:0 0 .6rem;
+  margin: 0 0 .6rem;
   color: var(--text);
   font-family: var(--sans);
   letter-spacing: -0.02em;
@@ -71,39 +68,34 @@ h1{ font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 800; }
 h2{ font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 800; }
 h3{ font-size: 1.25rem; font-weight: 700; }
 
-/* -------------------- Layout -------------------- */
-.container,
-.wrap{
+/* Layout helpers */
+.wrap, .container{
   width: min(var(--maxw), calc(100% - 96px));
   margin: 0 auto;
 }
 @media (max-width:768px){
-  .container,
-  .wrap{ width: min(var(--maxw), calc(100% - 40px)); }
+  .wrap, .container{ width: min(var(--maxw), calc(100% - 40px)); }
 }
 
+/* Generic section spacing */
 .section{
   padding: clamp(56px, 7vw, 96px) 0;
 }
 
-/* -------------------- Header (NEW Wix style) -------------------- */
-/* Use this if you're using the NEW header markup:
-   <header class="site-header"> ... <div class="header-inner"> ...
-*/
+/* -------------------- 3) Header -------------------- */
 .site-header{
   position: fixed;
-  top:0; left:0; right:0;
+  top: 0; left: 0; right: 0;
   z-index: 3000;
   background: var(--green);
-  /*border-top: 8px solid var(--purple);*/
 }
 
 .header-inner{
   height: var(--header-h);
   padding: 0 48px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 @media (max-width:768px){
   .header-inner{
@@ -112,17 +104,17 @@ h3{ font-size: 1.25rem; font-weight: 700; }
   }
 }
 
-.header-title,
-.site-name{
+.header-title{
   color: #fff;
   font-family: var(--sans);
   font-weight: 800;
   font-size: 22px;
   letter-spacing: .2px;
+  line-height: 1;
 }
 
-.header-menu,
-.menu-btn{
+/* Menu button (Menu + + icon) */
+.header-menu{
   background: transparent;
   border: 0;
   color: #fff;
@@ -130,197 +122,168 @@ h3{ font-size: 1.25rem; font-weight: 700; }
   font-weight: 800;
   font-size: 16px;
   cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
 }
 
-/* Optional dropdown menu for the NEW header */
-#site-menu.site-menu{
-  background: var(--green);
-  padding: 12px 48px 18px;
-  display:flex;
-  gap: 18px;
+.menu-x{
+  font-size: 44px;
+  line-height: 1;
+  display: inline-block;
+  transform: rotate(0deg);
+  transition: transform .22s var(--ease);
 }
-#site-menu.site-menu a{
-  color:#fff;
-  font-weight:700;
-  opacity:.9;
-}
-#site-menu.site-menu a:hover{ opacity:1; }
 
-/* -------------------- Header (LEGACY support) -------------------- */
-/* If you're still using your old header markup (Industry Salon),
-   this will "flatten" it to look like the screenshot:
-   - Hide logo + CTAs
-   - Only show a left title and right menu toggle
+.header-menu[aria-expanded="true"] .menu-x{
+  transform: rotate(45deg); /* plus -> X */
+}
+
+@media (max-width:480px){
+  .menu-label{ display: none; }
+}
+
+/* -------------------- 4) Fullscreen Overlay Menu -------------------- */
+/* scroll lock while menu open */
+html.no-scroll,
+body.no-scroll{
+  overflow: hidden !important;
+}
+
+/*
+  Important: nav has the [hidden] attribute in HTML.
+  By default hidden => display:none and breaks animation.
+  So we override it and use opacity/pointer-events instead.
 */
-header:not(.site-header){
+#mobile-menu.site-nav{
   position: fixed;
-  top:0; left:0; right:0;
-  z-index: 3000;
+  inset: 0;
+  z-index: 4000; /* above header */
+
   background: var(--green);
-  border-top: 8px solid var(--purple);
-  border-bottom: 0;
-  box-shadow: none;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+  display: grid;
+  place-items: center;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .22s var(--ease);
 }
 
-header:not(.site-header) .container{
-  width: 100%;
-  max-width: none;
-  padding: 0 48px;
-}
-@media (max-width:768px){
-  header:not(.site-header) .container{ padding: 0 18px; }
+/* keep layout alive even when hidden */
+#mobile-menu.site-nav[hidden]{
+  display: grid !important;
 }
 
-header:not(.site-header) .nav{
-  height: var(--header-h);
-  min-height: var(--header-h);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  grid-template-columns: none;
-  column-gap: 0;
-}
-@media (max-width:768px){
-  header:not(.site-header) .nav{
-    height: var(--header-h-mobile);
-    min-height: var(--header-h-mobile);
-  }
+/* open state */
+#mobile-menu.site-nav.is-open{
+  opacity: 1;
+  pointer-events: auto;
 }
 
-/* Hide extra stuff from the old header */
-header:not(.site-header) .nav-left,
-header:not(.site-header) .brand,
-header:not(.site-header) .nav-utility,
-header:not(.site-header) .cta-book,
-header:not(.site-header) .desktop-only,
-header:not(.site-header) .mobile-book{
-  display:none !important;
+/* big centered links */
+#mobile-menu.site-nav ul{
+  display: grid;
+  gap: 34px;
+  text-align: center;
 }
 
-/* Make your hamburger become the "Menu" label look */
-header:not(.site-header) .menu-toggle{
-  display:inline-flex !important;
-  background: transparent !important;
-  border: 0 !important;
-  box-shadow:none !important;
-  padding: 0 !important;
-  color:#fff !important;
+#mobile-menu.site-nav a{
+  font-family: var(--sans);
+  font-weight: 900;
+  font-size: clamp(2.6rem, 6vw, 4.2rem);
+  line-height: 1;
+  color: #fff;
 }
 
-/* If you want text "Menu" instead of icon, add span in HTML.
-   Otherwise the icon stays; this at least makes it white. */
-header:not(.site-header) .menu-icon .line{
-  stroke:#fff !important;
+/* subtle hover */
+#mobile-menu.site-nav a:hover{
+  opacity: .9;
 }
 
-/* -------------------- Hero (full-width image) -------------------- */
-/* Use your existing .hero wrapper, but make it behave like Wix */
+/* -------------------- 5) Hero -------------------- */
 .hero{
   padding: 0;
   margin: 0;
   background: transparent;
-  height: auto;
 }
 
-/* If you have a hero image element, use these helpers */
+/* your hero markup uses .hero-slide img */
+.hero-slide img,
 .hero img,
 .hero video{
   width: 100%;
   height: min(60vh, 520px);
   object-fit: cover;
-  display:block;
+  display: block;
 }
 
-/* -------------------- Intro “Hello.” section -------------------- */
+/* Optional dots/arrows if you keep them */
+.hero-dots{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 18px;
+  display: flex;
+  gap: 10px;
+}
+.dot{
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.35);
+}
+.dot.active{ background: rgba(255,255,255,.85); }
+
+/* -------------------- 6) Intro / Panel -------------------- */
 .intro,
-main.section,
-.section--dark{
-  background: var(--panel);
-}
-
-/* A reusable “Wix black panel” wrapper */
 .panel{
   background: var(--panel);
   padding: clamp(56px, 7vw, 96px) 0;
 }
 
-/* If your home uses .main-title or .page-title, make them match */
-.main-title,
-.page-title{
-  font-family: var(--sans);
-  font-weight: 900;
-  letter-spacing: -0.02em;
-  color: var(--text);
-  text-align:left;
-  left:auto;
-  transform:none;
-  display:block;
-  white-space: normal;
-}
-
-.page-title::after,
-.section-title::after{
-  display:none !important;
-}
-
-/* Subtext */
-.page-body,
 .lead{
   color: var(--muted);
   font-size: 1.15rem;
   font-weight: 600;
 }
 
-/* -------------------- Gallery grid -------------------- */
-/* Add class="gallery" to your work grid OR reuse .grid.three */
-.gallery,
-.grid.three{
-  display:grid;
+/* -------------------- 7) Gallery -------------------- */
+.gallery{
+  margin-top: 28px;
+  display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
 }
 @media (max-width:900px){
-  .gallery,
-  .grid.three{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .gallery{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width:560px){
-  .gallery,
-  .grid.three{ grid-template-columns: 1fr; }
+  .gallery{ grid-template-columns: 1fr; }
 }
 
-/* Tiles */
-.tile,
-.gallery a,
-.grid.three a{
-  display:block;
-  border: 1px solid rgba(255,255,255,.08);
+.tile{
+  display: block;
+  overflow: hidden;
   background: #111;
-  overflow:hidden;
+  border: 1px solid rgba(255,255,255,.08);
 }
 
-.tile img,
-.gallery img,
-.grid.three img{
-  width:100%;
+.tile img{
+  width: 100%;
   height: 260px;
   object-fit: cover;
-  display:block;
+  display: block;
   transform: scale(1);
   transition: transform .25s var(--ease);
 }
-.tile:hover img,
-.gallery a:hover img,
-.grid.three a:hover img{
-  transform: scale(1.03);
-}
+.tile:hover img{ transform: scale(1.03); }
 
-/* -------------------- Buttons (simple, Wix-like) -------------------- */
+/* -------------------- 8) Buttons -------------------- */
 .btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 12px 18px;
   border-radius: 999px;
   border: 1px solid rgba(255,255,255,.22);
@@ -328,161 +291,30 @@ main.section,
   color: #fff;
   font-family: var(--sans);
   font-weight: 700;
-  cursor:pointer;
+  cursor: pointer;
   transition: transform .15s var(--ease), background .15s var(--ease);
 }
-.btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.06); }
+.btn:hover{
+  transform: translateY(-1px);
+  background: rgba(255,255,255,.06);
+}
 
 .btn-primary{
   border-color: rgba(255,255,255,.35);
   background: rgba(255,255,255,.08);
 }
 
-/* -------------------- Cards (turn off glass look) -------------------- */
+/* -------------------- 9) Cards (optional) -------------------- */
 .card{
   background: #111;
   border: 1px solid rgba(255,255,255,.10);
   border-radius: 0;
   box-shadow: none;
   padding: 22px;
-  text-align:left;
-}
-.card:hover{ transform:none; }
-
-/* -------------------- Footer (green with divider lines) -------------------- */
-footer,
-.site-footer{
-  background: var(--green);
-  border-top: none;
-  padding: 48px 0 56px;
+  text-align: left;
 }
 
-/* If you keep your old footer structure */
-footer .container{
-  width: min(var(--maxw), calc(100% - 96px));
-  margin: 0 auto;
-}
-@media (max-width:768px){
-  footer .container{ width: min(var(--maxw), calc(100% - 40px)); }
-}
-
-/* Simple horizontal lines like Wix */
-.footer-line{
-  height: 1px;
-  background: var(--line);
-  margin: 0 0 34px;
-}
-.footer-line.bottom{ margin: 34px 0 0; }
-
-/* Footer layout (supports your new footer-grid approach) */
-.footer-grid{
-  display:flex;
-  justify-content:space-between;
-  gap: 24px;
-}
-@media (max-width:768px){
-  .footer-grid{ flex-direction: column; }
-}
-
-.footer-left .footer-name{
-  font-weight: 900;
-  font-size: 28px;
-  margin-bottom: 10px;
-}
-
-.footer-icons a{
-  margin-right: 12px;
-  font-weight: 800;
-  opacity: .9;
-}
-.footer-icons a:hover{ opacity: 1; }
-
-.footer-right a{
-  color:#fff;
-  font-weight: 700;
-  opacity: .9;
-}
-.footer-right a:hover{ opacity: 1; }
-
-/* Kill the old "footer-bottom" bar */
-.footer-bottom,
-.footer-bottom-inner{
-  display:none !important;
-}
-
-/* -------------------- Mobile menu (if you keep #mobile-menu) -------------------- */
-@media (max-width:768px){
-  #mobile-menu.site-nav{
-    position: fixed;
-    top: calc(env(safe-area-inset-top) + var(--header-h-mobile));
-    left: 0;
-    right: 0;
-    width: 100vw;
-    z-index: 2500;
-
-    background: var(--green);
-    border-bottom: 1px solid rgba(255,255,255,.18);
-
-    transform: translateY(-10px);
-    opacity: 0;
-    pointer-events:none;
-    transition: transform .2s var(--ease), opacity .2s var(--ease);
-  }
-
-  #mobile-menu.site-nav.is-open{
-    transform: translateY(0);
-    opacity: 1;
-    pointer-events:auto;
-  }
-
-  #mobile-menu.site-nav ul{
-    padding: 14px 18px 18px;
-    display:grid;
-    gap: 10px;
-  }
-
-  #mobile-menu.site-nav a{
-    display:block;
-    padding: 14px 12px;
-    border-radius: 10px;
-    background: rgba(255,255,255,.06);
-    color:#fff;
-    font-weight: 800;
-  }
-
-  #mobile-menu.site-nav a:hover{
-    background: rgba(255,255,255,.10);
-  }
-}
-
-#mobile-menu.site-nav{
-  background: var(--green);
-  border-bottom: 1px solid rgba(255,255,255,.18);
-  padding: 14px 48px 18px;
-}
-
-/*#mobile-menu.site-nav[hidden]{ display: none !important; }*/
-
-#mobile-menu.site-nav ul{
-  display:flex;
-  gap: 20px;
-}
-#mobile-menu.site-nav a{
-  color:#fff;
-  font-weight:800;
-  opacity:.92;
-}
-#mobile-menu.site-nav a:hover{ opacity:1; }
-
-@media (max-width:768px){
-  #mobile-menu.site-nav ul{
-    display:grid;
-    gap:10px;
-    padding:0;
-  }
-}
-
-/* ===== Wix-style footer ===== */
+/* -------------------- 10) Footer (matches screenshot) -------------------- */
 .site-footer{
   background: var(--green);
   padding: 44px 0;
@@ -492,33 +324,31 @@ footer .container{
   width: min(var(--maxw), calc(100% - 96px));
   margin: 0 auto;
 }
-
 @media (max-width:768px){
   .footer-inner{ width: min(var(--maxw), calc(100% - 40px)); }
 }
 
 .footer-rule{
   height: 1px;
-  background: rgba(255,255,255,.28);
+  background: var(--line);
 }
 
 .footer-row{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 34px 0;
   gap: 24px;
 }
-
 @media (max-width:768px){
   .footer-row{
     flex-direction: column;
     align-items: flex-start;
   }
-  .footer-right{ text-align:left; }
+  .footer-right{ text-align: left; }
 }
 
-/* Left block */
+/* left */
 .footer-name{
   color:#fff;
   font-family: var(--sans);
@@ -529,8 +359,8 @@ footer .container{
 }
 
 .footer-social{
-  display:flex;
-  align-items:center;
+  display: flex;
+  align-items: center;
   gap: 14px;
   margin-bottom: 10px;
 }
@@ -559,99 +389,35 @@ footer .container{
   opacity: .9;
 }
 
-/* Right block */
+/* right */
 .footer-right{
-  text-align:right;
-  color:#fff;
+  text-align: right;
+  color: #fff;
   font-weight: 800;
   font-size: 13px;
   line-height: 1.6;
 }
 
 .footer-right a{
-  color:#fff;
+  color: #fff;
   opacity: .95;
   font-weight: 800;
 }
-
-.footer-right a:hover{ opacity: 1; text-decoration: underline; }
+.footer-right a:hover{
+  opacity: 1;
+  text-decoration: underline;
+}
 
 .footer-small{
-  display:inline-block;
+  display: inline-block;
   margin-top: 6px;
   opacity: .95;
 }
 
-
-/* -------------------- Helpers -------------------- */
-.desktop-only{ display:inline-flex; }
-.mobile-only{ display:none; }
+/* -------------------- 11) Utilities -------------------- */
+.desktop-only{ display: inline-flex; }
+.mobile-only{ display: none; }
 @media (max-width:768px){
   .desktop-only{ display:none !important; }
   .mobile-only{ display:block !important; }
 }
-
-/* prevent scrolling when menu open */
-.no-scroll { overflow: hidden; }
-
-/* Full-screen overlay menu (desktop + mobile) */
-#mobile-menu.site-nav{
-  position: fixed;
-  inset: 0;
-  z-index: 4000; /* above header */
-
-  background: var(--green);
-  display: grid;
-  place-items: center;
-
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity .22s var(--ease);
-}
-
-/* keep hidden attribute from breaking animation */
-#mobile-menu.site-nav[hidden]{ display: grid !important; }
-
-#mobile-menu.site-nav.is-open{
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* Big centered list like screenshot */
-#mobile-menu.site-nav ul{
-  display: grid;
-  gap: 34px;
-  text-align: center;
-}
-
-#mobile-menu.site-nav a{
-  font-family: var(--sans);
-  font-weight: 900;
-  font-size: clamp(2.6rem, 6vw, 4.2rem);
-  line-height: 1;
-  color: #fff;
-}
-
-/* Header button becomes a rotated "+" (X) when open */
-.header-menu{
-  display: inline-flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.menu-x{
-  font-size: 44px;
-  line-height: 1;
-  transform: rotate(0deg);
-  transition: transform .22s var(--ease);
-}
-
-.header-menu[aria-expanded="true"] .menu-x{
-  transform: rotate(45deg); /* plus -> X */
-}
-
-/* optional: hide "Menu" text on small screens if you want only the icon */
-@media (max-width: 480px){
-  .menu-label{ display:none; }
-}
-
