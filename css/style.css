@@ -532,20 +532,35 @@ body.no-scroll{ overflow: hidden !important; }
   text-align: center;
 }
 
+.edu-row{
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 36px;
+  align-items: start;
+}
+
+.edu-meta{
+  font-weight: 800;
+}
+
+.edu-highlights{
+  color: rgba(255,255,255,.85);
+}
+
 /* ----- Me page: Education block mobile fix ----- */
 @media (max-width: 700px){
   .edu-row{
-    grid-template-columns: 1fr !important;
-    gap: 14px !important;
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .edu-highlights{
+    margin-top: 6px;
   }
 
   .edu-row .edu-meta{
     /* keeps the left info readable */
     max-width: 100%;
-  }
-
-  .edu-row .edu-highlights{
-    text-align: left !important;
   }
 }
 
