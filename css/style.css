@@ -544,6 +544,9 @@ body.no-scroll{ overflow: hidden !important; }
 }
 
 .edu-highlights{
+  justify-self: end;
+  text-align: right;
+  max-width: 520px;
   color: rgba(255,255,255,.85);
 }
 
@@ -555,7 +558,9 @@ body.no-scroll{ overflow: hidden !important; }
   }
 
   .edu-highlights{
-    margin-top: 6px;
+    justify-self: start;
+    text-align: left;
+    max-width: 100%;
   }
 }
 
