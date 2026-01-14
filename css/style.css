@@ -546,7 +546,7 @@ body.no-scroll{ overflow: hidden !important; }
 .edu-highlights{
   justify-self: end;
   text-align: right;
-  max-width: 520px;
+  max-width: 720px;
   color: rgba(255,255,255,.85);
 }
 
