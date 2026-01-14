@@ -1,47 +1,21 @@
 <!-- /partials/header.html -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-
-<!--Libre Franklin-->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-
-<!--Markazi Text-->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400..700&display=swap" rel="stylesheet">
-
-<!--Merriweather-->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap" rel="stylesheet">
-
-<!--Scheherazade New-->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;500;600;700&display=swap" rel="stylesheet">
-
 <header class="site-header">
   <div class="header-inner">
-    <a class="header-title" href="{{P}}index.html">Richie Izzo</a>
+    <a class="header-title" href="{{P}}index.html" aria-label="Home">Richie Izzo</a>
 
     <button class="header-menu"
+            type="button"
             aria-expanded="false"
-            aria-controls="mobile-menu"
-            aria-label="Toggle menu">
+            aria-controls="mobile-menu">
       Menu
     </button>
   </div>
 
-  <!-- keep your existing menu if you want it to slide down -->
-  <nav id="mobile-menu" class="site-nav">
+  <nav id="mobile-menu" class="site-nav" hidden>
     <ul>
-      <li><a href="{{P}}pages/services.html">Me</a></li>
-      <li><a href="{{P}}pages/stylists.html">Portfolio</a></li>
+      <li><a href="{{P}}pages/me.html">Me</a></li>
+      <li><a href="{{P}}pages/portfolio.html">Portfolio</a></li>
       <li><a href="{{P}}pages/contact.html">Contact</a></li>
     </ul>
   </nav>
 </header>
-
