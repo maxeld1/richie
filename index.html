@@ -48,26 +48,21 @@
 <main>
 
   <!-- HERO -->
-  <section class="hero" aria-label="Featured work">
+  <section class="hero">
     <div class="hero-slide">
-      <img
-              src="assets/images/hero-1.jpg"
-              alt="Featured work by Richie Izzo"
-              loading="eager"
-      />
+      <img src="assets/images/hero-1.jpg" alt="">
     </div>
 
-    <!-- dots (static for now; hook up later if you add slider JS) -->
+    <!-- arrows -->
+    <button class="hero-arrow left" aria-label="Previous slide">‹</button>
+    <button class="hero-arrow right" aria-label="Next slide">›</button>
+
+    <!-- dots -->
     <div class="hero-dots" aria-hidden="true">
       <span class="dot"></span>
       <span class="dot active"></span>
       <span class="dot"></span>
-      <span class="dot"></span>
     </div>
-
-    <!-- arrows (static for now; hook up later if you add slider JS) -->
-    <button class="hero-arrow left" type="button" aria-label="Previous slide">‹</button>
-    <button class="hero-arrow right" type="button" aria-label="Next slide">›</button>
   </section>
 
   <!-- INTRO + WORK GRID -->
