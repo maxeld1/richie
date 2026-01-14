@@ -1,6 +1,5 @@
 /* ==========================================================
-   Richie Izzo — Wix-style Portfolio Theme
-   Green header/footer, black body, fullscreen overlay menu
+   Richie Izzo — Portfolio
 ========================================================== */
 
 /* -------------------- 1) Tokens -------------------- */
@@ -142,21 +141,6 @@ h3{ font-size: 1.25rem; font-weight: 700; }
   font-size: 20px;
 }
 
-/* keep header above the panel */
-.site-header{ z-index: 5000; }     /* higher than the menu */
-#mobile-menu.site-nav{ z-index: 4000; }  /* menu under header */
-
-/* Ensure the backdrop doesn't sit on top of the header click area */
-#mobile-menu.site-nav{
-  top: var(--header-h);
-}
-
-@media (max-width:768px){
-  #mobile-menu.site-nav{
-    top: var(--header-h-mobile);
-  }
-}
-
 /* Menu button text swap */
 .header-menu{
   position: relative;
@@ -227,18 +211,44 @@ body.no-scroll{
   overflow: hidden !important;
 }
 
-/* Backdrop */
+/* -------------------- Drawer Menu (Half Page) -------------------- */
+.site-header{ z-index: 5000; }       /* header stays clickable */
+#mobile-menu.site-nav{ z-index: 4000; }
+
+html.no-scroll,
+body.no-scroll{ overflow: hidden !important; }
+
+/* Backdrop: STARTS BELOW HEADER so it never covers the button */
 #mobile-menu.site-nav{
   position: fixed;
-  inset: 0;
-  z-index: 4000;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: var(--header-h);              /* <-- key line */
 
-  /* backdrop */
   background: rgba(0,0,0,.35);
 
   opacity: 0;
   pointer-events: none;
   transition: opacity .22s var(--ease);
+}
+
+/* Mobile header height */
+@media (max-width:768px){
+  #mobile-menu.site-nav{
+    top: var(--header-h-mobile);
+  }
+}
+
+/* keep nav alive even with hidden attribute */
+#mobile-menu.site-nav[hidden]{
+  display: block !important;
+}
+
+/* open state */
+#mobile-menu.site-nav.is-open{
+  opacity: 1;
+  pointer-events: auto;
 }
 
 /* keep nav alive even with hidden attribute */
