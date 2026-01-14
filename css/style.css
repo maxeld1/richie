@@ -11,6 +11,9 @@
   --muted:#6F655D;
   --line:#E4D6C8;
 
+  --header-green: #305414;
+  --top-purple: #7a1d7e;
+
   --logo-brown:#594E45;
   --brand:#B4896A;
   --brand2:#8A6F5A;
@@ -1321,3 +1324,47 @@ body{ padding-top: var(--header-h); }
     width: 48px; /* slightly shorter on mobile */
   }
 }
+
+.site-header{
+  background: var(--header-green);
+  border-top: 8px solid var(--top-purple);
+}
+
+.header-inner{
+  height: 92px;
+  padding: 0 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+.header-title{
+  color: #fff;
+  font-family: "Tinos", serif;
+  font-weight: 700;
+  font-size: 40px;
+  letter-spacing: 0.2px;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.header-menu{
+  background: transparent;
+  border: 0;
+  color: #fff;
+  font-family: "Libre Franklin", sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.site-nav{
+  display: none;
+  background: var(--header-green);
+  padding: 16px 64px 24px;
+}
+
+.site-nav a{ color:#fff; text-decoration:none; font-family:"Libre Franklin", sans-serif; }
+.site-nav ul{ list-style:none; margin:0; padding:0; display:flex; gap:20px; }
+
