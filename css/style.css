@@ -858,7 +858,7 @@ body.no-scroll{
 }
 
 .portfolio-card img{
-  width: 120%;
+  width: 100%;
   height: clamp(260px, 28vw, 420px); /* consistent big tiles like screenshot */
   object-fit: cover;
   display: block;
