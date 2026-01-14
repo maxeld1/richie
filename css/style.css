@@ -666,7 +666,7 @@ body.no-scroll{
 }
 
 .contact-title{
-  font-size: clamp(3.2rem, 5.6vw, 5rem);
+  font-size: clamp(3.2rem, 5.6vw, 4.5rem);
   font-weight: 900;
   letter-spacing: -0.03em;
   line-height: 0.98;
