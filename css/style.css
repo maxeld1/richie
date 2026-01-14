@@ -555,6 +555,20 @@ body.no-scroll{
   height: 26px;
 }
 
+.icon-linkedin{
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.li-badge{
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1;
+}
+
 .footer-location{
   color:#fff;
   font-weight: 700;
