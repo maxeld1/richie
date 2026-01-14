@@ -556,6 +556,7 @@ body.no-scroll{ overflow: hidden !important; }
   .edu-row{
     grid-template-columns: 1fr;
     gap: 14px;
+    white-space: wrap;
   }
 
   .edu-highlights{
