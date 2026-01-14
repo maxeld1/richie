@@ -227,7 +227,7 @@ header:not(.site-header) .menu-icon .line{
 .hero img,
 .hero video{
   width: 100%;
-  height: min(450px, 60vh);
+  height: min(500px, 60vh);
   object-fit: cover;
   display:block;
 }
