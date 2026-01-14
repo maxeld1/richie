@@ -545,6 +545,19 @@ body.no-scroll{
   transition: opacity .18s var(--ease), transform .18s var(--ease);
 }
 
+.footer-social a,
+.hero-social a{
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #fff;
+  opacity: .95;
+  transition: opacity .18s ease, transform .18s ease;
+}
+
 .footer-social a:hover .footer-icon{
   opacity: 1;
   transform: translateY(-1px);
@@ -556,17 +569,21 @@ body.no-scroll{
 }
 
 .icon-linkedin{
-  width: 22px;
-  height: 22px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  font-family: "Futura", system-ui, sans-serif;
 }
 
 .li-badge{
-  font-size: 20px;
+  font-size: 20px;        /* matches SVG visual weight */
   font-weight: 800;
   line-height: 1;
+  transform: translateY(-1px); /* optical baseline alignment */
+  pointer-events: none;
+}
+
+.footer-social a:hover,
+.hero-social a:hover{
+  opacity: 1;
+  transform: translateY(-1px);
 }
 
 .footer-location{
