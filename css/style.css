@@ -633,7 +633,7 @@ header .nav-right{
 
 /* -------------------- Footer -------------------- */
 footer{
-  background:#EAE0D6;
+  background:rgb(48, 84, 20);
   border-top:1px solid var(--line);
   padding:40px 0 0;
 }
