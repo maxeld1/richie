@@ -314,27 +314,32 @@ body.no-scroll{
 }
 
 /* -------------------- Hero Dots -------------------- */
+/* ---------- HERO DOTS ---------- */
 .hero-dots{
   position: absolute;
   bottom: 18px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 5;
-
   display: flex;
   gap: 10px;
+  z-index: 10;
 }
 
 .hero-dots .dot{
   width: 8px;
   height: 8px;
+  padding: 0;
   border-radius: 50%;
-  background: rgba(255,255,255,.5);
+  border: 0;
+  background: rgba(255,255,255,.45);
+  cursor: pointer;
+  appearance: none;
 }
 
 .hero-dots .dot.active{
   background: #fff;
 }
+
 
 /* Hero slider */
 .hero{
