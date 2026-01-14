@@ -138,6 +138,10 @@ h3{ font-size: 1.25rem; font-weight: 700; }
   top: 0;
 }
 
+.menu-text {
+  font-size: 24px;
+}
+
 /* keep header above the panel */
 .site-header{ z-index: 5000; }     /* higher than the menu */
 #mobile-menu.site-nav{ z-index: 4000; }  /* menu under header */
