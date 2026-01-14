@@ -154,15 +154,9 @@ h3{ font-size: 1.25rem; font-weight: 700; }
   cursor: pointer;
 }
 
-/* default label */
-.header-menu .menu-text::before{
-  content: "Menu";
-}
-
-/* when open, show X */
-.header-menu[aria-expanded="true"] .menu-text::before{
-  content: "X";
-  font-size: 22px;          /* make it feel like an icon */
+/* When open, hide the word and show X */
+.header-menu[aria-expanded="true"] .menu-text{
+  font-size: 22px;
   line-height: 1;
 }
 
