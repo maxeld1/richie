@@ -441,7 +441,13 @@ body.no-scroll{
 
 .tile:hover img{ transform: scale(1.03); }
 
-/* -------------------- 8) Buttons -------------------- */
+/* -------------------- 8) Contact Section -------------------- */
+.contact-section {
+  padding: 120px 0;
+  text-align: center;
+}
+
+/* -------------------- 9) Buttons -------------------- */
 .btn{
   display: inline-flex;
   align-items: center;
@@ -466,7 +472,7 @@ body.no-scroll{
   background: rgba(255,255,255,.08);
 }
 
-/* -------------------- 9) Cards (optional) -------------------- */
+/* -------------------- 10) Cards -------------------- */
 .card{
   background: #111;
   border: 1px solid rgba(255,255,255,.10);
@@ -476,7 +482,7 @@ body.no-scroll{
   text-align: left;
 }
 
-/* -------------------- 10) Footer (matches screenshot) -------------------- */
+/* -------------------- 11) Footer -------------------- */
 .site-footer{
   background: var(--green);
   padding: 44px 0;
@@ -581,27 +587,10 @@ body.no-scroll{
   opacity: .95;
 }
 
-/* -------------------- 11) Utilities -------------------- */
+/* -------------------- 12) Utilities -------------------- */
 .desktop-only{ display: inline-flex; }
 .mobile-only{ display: none; }
 @media (max-width:768px){
   .desktop-only{ display:none !important; }
   .mobile-only{ display:block !important; }
 }
-
-.joke-page{
-  min-height: calc(100vh - var(--header-h));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #000;
-}
-
-.joke-center{
-  font-family: var(--sans);
-  font-weight: 900;
-  font-size: clamp(4rem, 12vw, 12rem);
-  color: #fff;
-  letter-spacing: -0.04em;
-}
-
