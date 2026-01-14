@@ -336,6 +336,31 @@ body.no-scroll{
   background: #fff;
 }
 
+/* Hero slider */
+.hero{
+  position: relative;
+  overflow: hidden;
+  height: min(60vh, 520px);
+}
+
+.hero-track{
+  display: flex;
+  height: 100%;
+  transition: transform .6s ease;
+}
+
+.hero-slide{
+  min-width: 100%;
+  height: 100%;
+}
+
+.hero-slide img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 
 
 /* -------------------- 6) Intro / Panel -------------------- */

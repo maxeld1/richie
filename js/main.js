@@ -86,3 +86,49 @@
   // Run after partials are injected (this is the important one)
   document.addEventListener("partials:loaded", initAll);
 })();
+
+// -------------------- HERO SLIDER --------------------
+(function(){
+  const track = document.querySelector('.hero-track');
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots = document.querySelectorAll('.hero-dots .dot');
+  const prev = document.querySelector('.hero-arrow.left');
+  const next = document.querySelector('.hero-arrow.right');
+
+  if (!track || slides.length === 0) return;
+
+  let index = 0;
+
+  function update(){
+    track.style.transform = `translateX(-${index * 100}%)`;
+
+    dots.forEach(d => d.classList.remove('active'));
+    if (dots[index]) dots[index].classList.add('active');
+  }
+
+  next?.addEventListener('click', () => {
+    index = (index + 1) % slides.length;
+    update();
+  });
+
+  prev?.addEventListener('click', () => {
+    index = (index - 1 + slides.length) % slides.length;
+    update();
+  });
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      index = i;
+      update();
+    });
+  });
+
+  // ✅ AUTO-ADVANCE
+  setInterval(() => {
+    index = (index + 1) % slides.length;
+    update();
+  }, 5000);
+
+})();
+
+
