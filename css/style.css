@@ -590,3 +590,68 @@ footer .container{
   .desktop-only{ display:none !important; }
   .mobile-only{ display:block !important; }
 }
+
+/* prevent scrolling when menu open */
+.no-scroll { overflow: hidden; }
+
+/* Full-screen overlay menu (desktop + mobile) */
+#mobile-menu.site-nav{
+  position: fixed;
+  inset: 0;
+  z-index: 4000; /* above header */
+
+  background: var(--green);
+  display: grid;
+  place-items: center;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .22s var(--ease);
+}
+
+/* keep hidden attribute from breaking animation */
+#mobile-menu.site-nav[hidden]{ display: grid !important; }
+
+#mobile-menu.site-nav.is-open{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Big centered list like screenshot */
+#mobile-menu.site-nav ul{
+  display: grid;
+  gap: 34px;
+  text-align: center;
+}
+
+#mobile-menu.site-nav a{
+  font-family: var(--sans);
+  font-weight: 900;
+  font-size: clamp(2.6rem, 6vw, 4.2rem);
+  line-height: 1;
+  color: #fff;
+}
+
+/* Header button becomes a rotated "+" (X) when open */
+.header-menu{
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.menu-x{
+  font-size: 44px;
+  line-height: 1;
+  transform: rotate(0deg);
+  transition: transform .22s var(--ease);
+}
+
+.header-menu[aria-expanded="true"] .menu-x{
+  transform: rotate(45deg); /* plus -> X */
+}
+
+/* optional: hide "Menu" text on small screens if you want only the icon */
+@media (max-width: 480px){
+  .menu-label{ display:none; }
+}
+
