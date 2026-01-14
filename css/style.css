@@ -551,16 +551,11 @@ body.no-scroll{ overflow: hidden !important; }
 @media (max-width: 700px){
   .edu-row{
     grid-template-columns: 1fr;
-    gap: 18px;
+    gap: 14px;
   }
 
   .edu-highlights{
     margin-top: 6px;
-  }
-
-  .edu-row .edu-meta{
-    /* keeps the left info readable */
-    max-width: 100%;
   }
 }
 
