@@ -82,7 +82,7 @@ body{
   margin:0;
   padding:0;
   overflow-x:hidden;
-  background: var(--bg);
+  background: #000000;
   /*background: url("../assets/images/industry_bg.jpg");*/
 }
 
