@@ -14,6 +14,7 @@
   <link rel="icon" href="../assets/icons/favicon.ico" />
   <link rel="manifest" href="../manifest.webmanifest" />
   <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.6/build/css/intlTelInput.css">
   <meta property="og:title" content="Industry Salon — Hair • Beauty • Nails" />
   <meta property="og:description" content="Modern salon in Newtown Square. Book online or call." />
   <meta property="og:type" content="website" />
@@ -72,8 +73,11 @@
 
         <label class="field">
           <span class="label">Phone</span>
-          <input class="input" type="tel" name="phone" />
+          <input class="input" id="phone" type="tel" name="phone" autocomplete="tel" />
         </label>
+
+        <!-- Hidden field that submits full international number -->
+        <input type="hidden" name="phone_e164" id="phone_e164">
 
         <label class="field">
           <span class="label">Lay it on me *</span>
@@ -94,5 +98,43 @@
 <script src="../js/partials.js"></script>
 
 <script>document.getElementById("year").textContent=new Date().getFullYear()</script>
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.6/build/js/intlTelInput.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const phoneInput = document.querySelector("#phone");
+    if (!phoneInput) return;
+
+    const iti = window.intlTelInput(phoneInput, {
+      // shows +1, +44, etc in the input
+      separateDialCode: true,
+
+      // pick one:
+      initialCountry: "us",
+      // initialCountry: "auto",
+      // geoIpLookup: (cb) => fetch("https://ipapi.co/json/")
+      //   .then(r => r.json()).then(d => cb((d && d.country_code) ? d.country_code.toLowerCase() : "us"))
+      //   .catch(() => cb("us")),
+
+      // enables the search box (like your screenshot)
+      allowDropdown: true,
+      nationalMode: true,
+      formatOnDisplay: true,
+
+      // needed for formatting/validation utils
+      utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.6/build/js/utils.js",
+    });
+
+    // On submit, store E.164 full number in hidden field
+    const form = phoneInput.closest("form");
+    const hidden = document.querySelector("#phone_e164");
+
+    if (form && hidden) {
+      form.addEventListener("submit", () => {
+        hidden.value = iti.getNumber(); // e.g. +16105551234
+      });
+    }
+  });
+</script>
+
 </body>
 </html>
