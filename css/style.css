@@ -555,25 +555,6 @@ body.no-scroll{
   height: 26px;
 }
 
-.social-link {
-  display: inline-flex;
-  align-items: center;
-}
-
-.li-badge {
-  width: 18px;
-  height: 18px;
-  display: block;
-  transform: translateY(1px); /* optical alignment */
-  opacity: .95;
-  transition: opacity .18s ease, transform .18s ease;
-}
-
-.social-link:hover .li-badge {
-  opacity: 1;
-  transform: translateY(-1px);
-}
-
 .footer-location{
   color:#fff;
   font-weight: 700;
