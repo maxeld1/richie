@@ -155,42 +155,60 @@ function initHeroSlider() {
   startAuto();
 }
 
-function initScrollReveal() {
-  const els = document.querySelectorAll(".reveal");
-  if (!els.length) return;
+// ---- Reveal / fade (single source of truth + stagger) ----
+(function () {
+  document.documentElement.classList.add("js");
 
-  const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            obs.unobserve(entry.target); // animate once
-          }
-        });
-      },
-      {
-        root: null,
-        threshold: 0.12,
-        rootMargin: "0px 0px -10% 0px", // triggers a bit before fully centered
-      }
-  );
+  function applyStagger(el) {
+    // If element has data-stagger="120", use that spacing (ms)
+    const parent = el.closest("[data-stagger]");
+    if (!parent) return;
 
-  els.forEach((el) => obs.observe(el));
-}
+    const spacing = parseInt(parent.getAttribute("data-stagger") || "120", 10);
+    const items = Array.from(parent.querySelectorAll(".fade-line"));
+
+    items.forEach((node, i) => {
+      node.style.transitionDelay = `${i * spacing}ms`;
+    });
+  }
+
+  function initReveals() {
+    const els = document.querySelectorAll(".fade-up, .fade-line, .reveal");
+    if (!els.length) return;
+
+    // Apply stagger delays (for fade-line groups)
+    els.forEach(applyStagger);
+
+    if (!("IntersectionObserver" in window)) {
+      els.forEach(el => el.classList.add("is-visible"));
+      return;
+    }
+
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        obs.unobserve(entry.target);
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -10% 0px" });
+
+    els.forEach(el => io.observe(el));
+  }
+
+  window.addEventListener("load", () => {
+    initReveals();
+    setTimeout(initReveals, 80);
+    setTimeout(initReveals, 300);
+    setTimeout(initReveals, 700);
+  });
+})();
 
 /**
  * IMPORTANT:
  * init after the DOM settles.
  */
 window.addEventListener("load", () => {
-  // Fade-in lines
-  document.querySelectorAll(".fade-line").forEach(el => {
-    el.classList.add("is-visible");
-  });
-
-  // Hero slider
   initHeroSlider();
-  initScrollReveal();        // add this
 
   // If hero is injected after load, retry briefly
   let tries = 0;
