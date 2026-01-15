@@ -170,3 +170,11 @@ window.addEventListener("load", () => {
     if (++tries > 10) clearInterval(retry);
   }, 150);
 });
+
+
+window.addEventListener("load", () => {
+  document.querySelectorAll(".fade-line").forEach(el => {
+    el.classList.add("is-visible");
+  });
+});
+
