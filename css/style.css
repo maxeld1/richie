@@ -1030,7 +1030,11 @@ body.no-scroll{ overflow: hidden !important; }
 
 
 /* -------------------- 16) Fading -------------------- */
-/* Initial hidden state */
+.hero-lines{
+  display: grid;
+  gap: 10px; /* space between lines */
+}
+
 .fade-line{
   display: inline-block;
   opacity: 0;
@@ -1041,6 +1045,14 @@ body.no-scroll{ overflow: hidden !important; }
   will-change: opacity, transform;
 }
 
+.hero-lines .fade-line:nth-child(1){ transition-delay: 400ms; }
+.hero-lines .fade-line:nth-child(2){ transition-delay: 1000ms; }
+
+body.is-loaded .fade-line{
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* stagger timing */
 .fade-line:nth-of-type(1){
   transition-delay: 0ms;
@@ -1048,11 +1060,6 @@ body.no-scroll{ overflow: hidden !important; }
 
 .fade-line:nth-of-type(2){
   transition-delay: 180ms;
-}
-
-body.is-loaded .fade-line{
-  opacity: 1;
-  transform: translateY(0);
 }
 
 /* When active */
