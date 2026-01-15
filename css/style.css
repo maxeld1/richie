@@ -1035,9 +1035,19 @@ body.no-scroll{ overflow: hidden !important; }
   display: inline-block;
   opacity: 0;
   transform: translateY(12px);
-  transition: opacity .6s var(--ease), transform .6s var(--ease);
-  transition-delay: var(--d, 0ms);
+  transition:
+          opacity .6s var(--ease),
+          transform .6s var(--ease);
   will-change: opacity, transform;
+}
+
+/* stagger timing */
+.fade-line:nth-of-type(1){
+  transition-delay: 0ms;
+}
+
+.fade-line:nth-of-type(2){
+  transition-delay: 180ms;
 }
 
 body.is-loaded .fade-line{
@@ -1051,12 +1061,12 @@ body.is-loaded .fade-line{
   transform: translateY(0);
 }
 
-/* Stagger timing */
-.fade-line:nth-child(1) {
-  transition-delay: 0.1s;
-}
 
-.fade-line:nth-child(2) {
-  transition-delay: 0.35s;
+@media (prefers-reduced-motion: reduce){
+  .fade-line{
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
 }
 
