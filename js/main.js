@@ -155,6 +155,29 @@ function initHeroSlider() {
   startAuto();
 }
 
+function initScrollReveal() {
+  const els = document.querySelectorAll(".reveal");
+  if (!els.length) return;
+
+  const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            obs.unobserve(entry.target); // animate once
+          }
+        });
+      },
+      {
+        root: null,
+        threshold: 0.12,
+        rootMargin: "0px 0px -10% 0px", // triggers a bit before fully centered
+      }
+  );
+
+  els.forEach((el) => obs.observe(el));
+}
+
 /**
  * IMPORTANT:
  * init after the DOM settles.
@@ -167,6 +190,7 @@ window.addEventListener("load", () => {
 
   // Hero slider
   initHeroSlider();
+  initScrollReveal();        // add this
 
   // If hero is injected after load, retry briefly
   let tries = 0;

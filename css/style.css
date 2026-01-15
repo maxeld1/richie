@@ -92,6 +92,43 @@ h3{ font-size: 1.25rem; font-weight: 700; }
   padding: clamp(56px, 7vw, 96px) 0;
 }
 
+.me-statement{
+  padding-top: clamp(80px, 12vw, 140px);
+  padding-bottom: clamp(48px, 8vw, 80px);
+}
+
+.statement-text{
+  font-size: clamp(1.4rem, 2.4vw, 2rem);
+  font-weight: 700;
+  color: rgba(255,255,255,.85);
+  max-width: 720px;
+  position: relative;
+}
+
+.statement-text::before{
+  content: "";
+  position: absolute;
+  left: -28px;
+  top: 0.6em;
+  width: 16px;
+  height: 2px;
+  background: rgba(255,255,255,.4);
+}
+
+.manifesto{
+  padding-top: clamp(48px, 7vw, 96px);
+}
+
+.manifesto-title{
+  margin-bottom: 28px;
+}
+
+.manifesto p{
+  max-width: 720px;
+  font-size: 1.05rem;
+  line-height: 1.65;
+}
+
 /* -------------------- 3) Header -------------------- */
 .site-header{
   position: fixed;
@@ -565,6 +602,37 @@ body.no-scroll{ overflow: hidden !important; }
     max-width: 100%;
   }
 }
+
+/* ===== Scroll reveal (Me page) ===== */
+.reveal{
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .7s var(--ease), transform .7s var(--ease);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* optional: slightly faster on mobile */
+@media (max-width: 768px){
+  .reveal{
+    transform: translateY(14px);
+    transition-duration: .6s;
+  }
+}
+
+/* accessibility */
+@media (prefers-reduced-motion: reduce){
+  .reveal{
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
 
 
 /* -------------------- 9) Buttons -------------------- */
