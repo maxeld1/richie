@@ -75,6 +75,9 @@ function initHeroSlider() {
   const hero = document.querySelector(".hero");
   if (!hero) return;
 
+  if (hero.dataset.sliderWired === "true") return;
+  hero.dataset.sliderWired = "true";
+
   const track = hero.querySelector(".hero-track");
   const slides = Array.from(hero.querySelectorAll(".hero-slide"));
   const prevBtn = hero.querySelector(".hero-arrow.left");
@@ -154,13 +157,18 @@ function initHeroSlider() {
 
 /**
  * IMPORTANT:
- * If your page uses partials.js to inject header/footer (and maybe hero),
  * init after the DOM settles.
  */
 window.addEventListener("load", () => {
+  // Fade-in lines
+  document.querySelectorAll(".fade-line").forEach(el => {
+    el.classList.add("is-visible");
+  });
+
+  // Hero slider
   initHeroSlider();
 
-  // If your hero is injected AFTER load (rare), retry a couple times:
+  // If hero is injected after load, retry briefly
   let tries = 0;
   const retry = setInterval(() => {
     if (document.querySelector(".hero .hero-track")) {
@@ -170,11 +178,3 @@ window.addEventListener("load", () => {
     if (++tries > 10) clearInterval(retry);
   }, 150);
 });
-
-
-window.addEventListener("load", () => {
-  document.querySelectorAll(".fade-line").forEach(el => {
-    el.classList.add("is-visible");
-  });
-});
-
