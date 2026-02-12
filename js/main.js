@@ -220,3 +220,41 @@ window.addEventListener("load", () => {
     if (++tries > 10) clearInterval(retry);
   }, 150);
 });
+
+function initPortfolioFilters() {
+  const filterWrap = document.querySelector(".portfolio-filters");
+  if (!filterWrap) return;
+
+  const buttons = Array.from(filterWrap.querySelectorAll("[data-filter]"));
+  const cards = Array.from(document.querySelectorAll(".portfolio-card"));
+  if (!buttons.length || !cards.length) return;
+
+  function setActive(filter) {
+    buttons.forEach((btn) => {
+      const isActive = btn.dataset.filter === filter;
+      btn.classList.toggle("is-active", isActive);
+      btn.setAttribute("aria-pressed", isActive ? "true" : "false");
+    });
+
+    cards.forEach((card) => {
+      const categories = (card.dataset.category || "")
+        .split(/\s+/)
+        .filter(Boolean);
+      const isMatch = filter === "all" || categories.includes(filter);
+      card.classList.toggle("is-hidden", !isMatch);
+    });
+  }
+
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      setActive(btn.dataset.filter || "all");
+    });
+  });
+
+  const initial = buttons.find((btn) => btn.classList.contains("is-active"));
+  setActive((initial && initial.dataset.filter) || "all");
+}
+
+window.addEventListener("load", () => {
+  initPortfolioFilters();
+});

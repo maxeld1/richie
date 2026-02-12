@@ -24,16 +24,23 @@
 
   <section class="portfolio-grid-section">
     <div class="wrap">
+      <div class="portfolio-filters" role="group" aria-label="Filter portfolio">
+        <button class="filter-btn is-active" type="button" data-filter="all" aria-pressed="true">All</button>
+        <button class="filter-btn" type="button" data-filter="musicals" aria-pressed="false">Musicals</button>
+        <button class="filter-btn" type="button" data-filter="plays" aria-pressed="false">Plays</button>
+        <button class="filter-btn" type="button" data-filter="songs" aria-pressed="false">Songs</button>
+      </div>
+
       <div class="portfolio-grid">
-        <a class="portfolio-card">
+        <a class="portfolio-card" data-category="musicals">
           <img src="../assets/images/work-1.jpg" alt="Work 1">
         </a>
 
-        <a class="portfolio-card">
+        <a class="portfolio-card" data-category="plays">
           <img src="../assets/images/work-1.jpg" alt="Work 2">
         </a>
 
-        <a class="portfolio-card">
+        <a class="portfolio-card" data-category="songs">
           <img src="../assets/images/work-1.jpg" alt="Work 3">
         </a>
       </div>
