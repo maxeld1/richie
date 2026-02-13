@@ -1189,9 +1189,10 @@ body.no-scroll{ overflow: hidden !important; }
 
 .project-gallery-grid img{
   width: 100%;
-  height: clamp(220px, 26vw, 360px);
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
   display: block;
+  background: #000;
 }
 
 
