@@ -1225,6 +1225,22 @@ body.no-scroll{ overflow: hidden !important; }
   line-height: 1.05;
 }
 
+.page-home .hero-lines .fade-line{
+  opacity: 0 !important;
+  transform: translateY(12px) !important;
+}
+
+.page-home.home-ready .hero-lines .fade-line:first-child{
+  opacity: 1 !important;
+  transform: none !important;
+  transition: opacity 1.2s var(--ease), transform 1.2s var(--ease);
+}
+
+.page-home.has-scrolled .hero-lines .lead.fade-line{
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
 .fade-line{
   display: inline-block;
   opacity: 0;
