@@ -342,12 +342,12 @@ body.no-scroll{ overflow: hidden !important; }
 
 #mobile-menu.site-nav a:hover{ opacity: .9; }
 
-/* Mobile: drawer becomes ~80% width */
+/* Mobile: drawer becomes ~50% width */
 @media (max-width:768px){
   #mobile-menu.site-nav::before,
   #mobile-menu.site-nav ul{
-    width: 82vw;
-    padding: 0 22px;
+    width: 50vw;
+    padding: 0 20px;
   }
 }
 
@@ -405,8 +405,8 @@ body.no-scroll{ overflow: hidden !important; }
   transform: translateY(-50%);
   z-index: 10;
 
-  width: 56px;
-  height: 56px;
+  width: 72px;
+  height: 72px;
 
   display: flex;
   align-items: center;
@@ -415,22 +415,22 @@ body.no-scroll{ overflow: hidden !important; }
   background: none;
   color: #fff;
 
-  font-size: 42px; /* ⬅ controls arrow size */
-  line-height: 1.5;
+  font-size: 54px; /* ⬅ controls arrow size */
+  line-height: 1;
+  font-weight: 300;
 
   border: 0;
-  border-radius: 50%;
   cursor: pointer;
 
-  transition: background .2s ease, transform .2s ease;
+  transition: opacity .2s ease;
 }
 
 .hero-arrow.left{ left: 18px; }
 .hero-arrow.right{ right: 18px; }
 
 .hero-arrow:hover{
-  background: rgba(0,0,0,.65);
-  transform: translateY(-50%) scale(1.05);
+  background: none;
+  opacity: .75;
 }
 
 
@@ -561,7 +561,7 @@ body.no-scroll{ overflow: hidden !important; }
   transition: transform .25s var(--ease);
 }
 
-.tile:hover img{ transform: scale(1.03); }
+/*.tile:hover img{ transform: scale(1.03); }*/
 
 /* -------------------- 8) Contact Section -------------------- */
 .contact-section {
@@ -579,6 +579,17 @@ body.no-scroll{ overflow: hidden !important; }
 
 .edu-meta{
   font-weight: 800;
+}
+
+.me-hero-photo{
+  width: 100%;
+  max-width: 560px;
+  display: block;
+  margin-left: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid var(--green);
 }
 
 .edu-highlights{
@@ -1247,8 +1258,12 @@ html.js .fade-line,
 html.js .reveal{
   opacity: 0;
   transform: translateY(16px);
-  transition: opacity .6s var(--ease), transform .6s var(--ease);
+  transition: opacity 1.2s var(--ease), transform 1.2s var(--ease);
   will-change: opacity, transform;
+}
+
+html.js .page-me .reveal{
+  transition: opacity 2.8s var(--ease), transform 2.8s var(--ease);
 }
 
 html.js .is-visible{

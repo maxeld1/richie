@@ -150,6 +150,28 @@ function initHeroSlider() {
   hero.addEventListener("touchstart", stopAuto, { passive: true });
   hero.addEventListener("touchend", startAuto, { passive: true });
 
+  // Swipe support (mobile)
+  let touchStartX = 0;
+  let touchStartY = 0;
+  const SWIPE_THRESHOLD = 40;
+
+  hero.addEventListener("touchstart", (e) => {
+    const t = e.touches[0];
+    touchStartX = t.clientX;
+    touchStartY = t.clientY;
+  }, { passive: true });
+
+  hero.addEventListener("touchend", (e) => {
+    const t = e.changedTouches[0];
+    const dx = t.clientX - touchStartX;
+    const dy = t.clientY - touchStartY;
+
+    if (Math.abs(dx) < SWIPE_THRESHOLD) return;
+    if (Math.abs(dx) < Math.abs(dy)) return;
+
+    dx < 0 ? next(true) : prev(true);
+  }, { passive: true });
+
   // Make sure widths are correct before first render
   update();
   startAuto();
