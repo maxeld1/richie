@@ -105,27 +105,18 @@
     const phoneInput = document.querySelector("#phone");
     if (!phoneInput) return;
 
-    const iti = window.intlTelInput(phoneInput, {
-      // shows +1, +44, etc in the input
+    const opts = {
       separateDialCode: true,
-
-      // pick one:
       initialCountry: "us",
-      // initialCountry: "auto",
-      // geoIpLookup: (cb) => fetch("https://ipapi.co/json/")
-      //   .then(r => r.json()).then(d => cb((d && d.country_code) ? d.country_code.toLowerCase() : "us"))
-      //   .catch(() => cb("us")),
-
-      // enables the search box (like your screenshot)
       allowDropdown: true,
       nationalMode: true,
       formatOnDisplay: true,
-
-      // needed for formatting/validation utils
+      useFullscreenPopup: false,
       utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.6/build/js/utils.js",
-    });
+    };
 
-    // On submit, store E.164 full number in hidden field
+    const iti = window.intlTelInput(phoneInput, opts);
+
     const form = phoneInput.closest("form");
     const hidden = document.querySelector("#phone_e164");
 

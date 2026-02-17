@@ -1035,23 +1035,33 @@ body.no-scroll{ overflow: hidden !important; }
   border-color: rgba(255,255,255,.2) !important;
 }
 
-.page-me .iti input[type="tel"]{
+.page-me .iti input[type="tel"],
+.contact-page .iti input[type="tel"]{
   padding-left: 64px !important;
 }
 
-.page-me .field:has(.iti){
+.page-me .field:has(.iti),
+.contact-page .field:has(.iti){
   position: relative;
   z-index: 2;
   overflow: visible;
 }
 
-.page-me .iti__country-list{
+.page-me .iti,
+.contact-page .iti{
+  position: relative;
+  width: 100%;
+}
+
+.page-me .iti__country-list,
+.contact-page .iti__country-list{
   position: absolute !important;
+  top: calc(100% + 8px) !important;
   left: 0 !important;
   right: 0 !important;
   width: 100% !important;
   box-sizing: border-box !important;
-  max-height: 260px !important;
+  max-height: min(260px, 45vh) !important;
   overflow-y: auto !important;
   z-index: 9999 !important;
 }
