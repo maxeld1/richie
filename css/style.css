@@ -902,6 +902,11 @@ body.no-scroll{ overflow: hidden !important; }
   max-width: 520px;
 }
 
+.contact-form-centered{
+  margin: 28px auto 0;
+  text-align: left;
+}
+
 .field{
   display: grid;
   gap: 10px;
@@ -1028,6 +1033,27 @@ body.no-scroll{ overflow: hidden !important; }
 
 .iti__divider{
   border-color: rgba(255,255,255,.2) !important;
+}
+
+.page-me .iti input[type="tel"]{
+  padding-left: 64px !important;
+}
+
+.page-me .field:has(.iti){
+  position: relative;
+  z-index: 2;
+  overflow: visible;
+}
+
+.page-me .iti__country-list{
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  max-height: 260px !important;
+  overflow-y: auto !important;
+  z-index: 9999 !important;
 }
 
 /* -------------------- 15) Portfolio Page -------------------- */

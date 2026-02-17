@@ -6,6 +6,7 @@
   <title>Me — Richie Izzo</title>
   <link rel="icon" href="../favicon.png" type="image/png" />
   <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.6/build/css/intlTelInput.css">
 </head>
 <body class="page-me">
 
@@ -134,15 +135,16 @@
       <h1>Let’s Work Together</h1>
       <p class="lead">Get in touch so we can start working together.</p>
 
-      <form style="margin:28px auto 0;display:grid;grid-template-columns:1fr 1fr;gap:26px;max-width:900px;text-align:left;">
+      <form action="#" method="post" style="margin:28px auto 0;display:grid;grid-template-columns:1fr 1fr;gap:26px;max-width:900px;text-align:left;">
         <div style="display:grid;gap:16px;">
-          <label>First Name<br><input style="width:100%;padding:14px;" /></label>
-          <label>Last Name<br><input style="width:100%;padding:14px;" /></label>
-          <label>Email *<br><input style="width:100%;padding:14px;" /></label>
+          <label>Name *<br><input style="width:100%;padding:14px;" type="text" name="name" required /></label>
+          <label>Email *<br><input style="width:100%;padding:14px;" type="email" name="email" required /></label>
+          <label>Phone<br><input id="phone" style="width:100%;padding:14px;" type="tel" name="phone" autocomplete="tel" /></label>
+          <input type="hidden" name="phone_e164" id="phone_e164">
         </div>
 
         <div style="display:grid;gap:16px;">
-          <label>Message<br><textarea style="width:100%;min-height:220px;padding:14px;"></textarea></label>
+          <label>Message *<br><textarea style="width:100%;min-height:220px;padding:14px;" name="message" required></textarea></label>
           <button class="btn" type="submit" style="justify-self:end;padding:12px 44px;border:1px solid rgba(255,255,255,.7);">
             Send
           </button>
@@ -157,5 +159,31 @@
 
 <script src="../js/partials.js"></script>
 <script src="../js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.6/build/js/intlTelInput.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const phoneInput = document.querySelector("#phone");
+    if (!phoneInput) return;
+
+    const iti = window.intlTelInput(phoneInput, {
+      separateDialCode: true,
+      initialCountry: "us",
+      allowDropdown: true,
+      nationalMode: true,
+      formatOnDisplay: true,
+      utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.6/build/js/utils.js",
+    });
+
+    const form = phoneInput.closest("form");
+    const hidden = document.querySelector("#phone_e164");
+
+    if (form && hidden) {
+      form.addEventListener("submit", () => {
+        hidden.value = iti.getNumber();
+      });
+    }
+  });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.6/build/js/utils.js"></script>
 </body>
 </html>
