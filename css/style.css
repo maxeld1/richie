@@ -1236,6 +1236,7 @@ body.no-scroll{ overflow: hidden !important; }
   font-size: 28px;
   line-height: 1;
   cursor: pointer;
+  outline: none;
 }
 
 .portfolio-modal-title{
