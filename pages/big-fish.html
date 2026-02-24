@@ -47,6 +47,16 @@
   </section>
 </main>
 
+<div class="gallery-modal" id="gallery-modal" aria-hidden="true">
+  <div class="gallery-modal-overlay" data-gallery-close></div>
+  <div class="gallery-modal-card" role="dialog" aria-modal="true" aria-label="Gallery image">
+    <button class="gallery-modal-close" type="button" data-gallery-close aria-label="Close image">&times;</button>
+    <button class="gallery-modal-nav prev" type="button" data-gallery-prev aria-label="Previous image">&#10094;</button>
+    <button class="gallery-modal-nav next" type="button" data-gallery-next aria-label="Next image">&#10095;</button>
+    <img class="gallery-modal-image" id="gallery-modal-image" alt="">
+  </div>
+</div>
+
 <div data-include="footer"></div>
 
 <script src="../js/partials.js"></script>

@@ -480,6 +480,75 @@ window.addEventListener("load", () => {
   initAudioPlayers();
 });
 
+function initGalleryLightbox() {
+  const modal = document.getElementById("gallery-modal");
+  if (!modal) return;
+
+  const images = Array.from(document.querySelectorAll(".project-gallery-grid img"));
+  if (!images.length) return;
+
+  const imgEl = document.getElementById("gallery-modal-image");
+  const closeEls = Array.from(modal.querySelectorAll("[data-gallery-close]"));
+  const prevBtn = modal.querySelector("[data-gallery-prev]");
+  const nextBtn = modal.querySelector("[data-gallery-next]");
+  let index = 0;
+  let lastFocus = null;
+
+  function show(i) {
+    index = (i + images.length) % images.length;
+    const src = images[index].getAttribute("src");
+    const alt = images[index].getAttribute("alt") || "";
+    if (imgEl) {
+      imgEl.src = src;
+      imgEl.alt = alt;
+    }
+  }
+
+  function open(i) {
+    lastFocus = document.activeElement;
+    show(i);
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("no-scroll");
+    if (prevBtn) prevBtn.focus();
+  }
+
+  function close() {
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("no-scroll");
+    if (lastFocus && typeof lastFocus.focus === "function") {
+      lastFocus.focus();
+    }
+  }
+
+  images.forEach((img, i) => {
+    img.style.cursor = "pointer";
+    img.addEventListener("click", () => open(i));
+  });
+
+  if (prevBtn) prevBtn.addEventListener("click", () => show(index - 1));
+  if (nextBtn) nextBtn.addEventListener("click", () => show(index + 1));
+
+  closeEls.forEach((el) => {
+    el.addEventListener("click", (e) => {
+      e.preventDefault();
+      close();
+    });
+  });
+
+  window.addEventListener("keydown", (e) => {
+    if (!modal.classList.contains("is-open")) return;
+    if (e.key === "Escape") close();
+    if (e.key === "ArrowLeft") show(index - 1);
+    if (e.key === "ArrowRight") show(index + 1);
+  });
+}
+
+window.addEventListener("load", () => {
+  initGalleryLightbox();
+});
+
 function initHomeScrollReveal() {
   const body = document.body;
   if (!body.classList.contains("page-home")) return;
