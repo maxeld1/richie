@@ -1215,6 +1215,18 @@ body.no-scroll{ overflow: hidden !important; }
   overflow-y: auto;
 }
 
+.portfolio-modal.has-cover .portfolio-modal-card{
+  padding-right: calc(clamp(22px, 4vw, 36px) + clamp(120px, 24vw, 180px) + 20px);
+}
+
+.portfolio-modal.has-cover .portfolio-modal-notes{
+  margin-right: calc(-1 * (clamp(120px, 24vw, 180px) + 20px));
+}
+
+.portfolio-modal.has-cover .portfolio-modal-actions{
+  margin-right: calc(-1 * (clamp(120px, 24vw, 180px) + 20px));
+}
+
 .portfolio-modal-cover{
   width: clamp(120px, 24vw, 180px);
   height: clamp(120px, 24vw, 180px);
@@ -1266,6 +1278,9 @@ body.no-scroll{ overflow: hidden !important; }
 
 .portfolio-modal-value{
   color: rgba(255,255,255,.92);
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .portfolio-modal-notes{
@@ -1274,17 +1289,34 @@ body.no-scroll{ overflow: hidden !important; }
   margin: 0 0 22px;
 }
 
-.portfolio-modal-cta{
+.portfolio-modal-cta,
+.portfolio-modal-back{
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 12px 26px;
+  font-family: Futura, serif;
+  font-weight: 800;
+  font-size: 1rem;
+  line-height: 1;
+  letter-spacing: .02em;
   background: var(--green);
   color: #fff;
   border: 1px solid var(--green);
   border-radius: 0;
-  font-weight: 800;
-  letter-spacing: .02em;
+}
+
+.portfolio-modal-actions{
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.portfolio-modal-back{
+  background: #d14942;
+  border-color: #d14942;
+  cursor: pointer;
 }
 
 @media (max-width: 720px){

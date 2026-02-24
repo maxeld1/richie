@@ -324,10 +324,12 @@ function initPortfolioModal() {
         coverEl.src = data.cover;
         coverEl.alt = title;
         coverEl.style.display = "block";
+        modal.classList.add("has-cover");
       } else {
         coverEl.removeAttribute("src");
         coverEl.alt = "";
         coverEl.style.display = "none";
+        modal.classList.remove("has-cover");
       }
     }
 
