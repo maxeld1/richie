@@ -33,21 +33,72 @@
       </div>
 
       <div class="portfolio-grid">
-        <a class="portfolio-card" data-category="musicals" href="../pages/big-fish.html" aria-label="Big Fish project gallery">
+        <a
+          class="portfolio-card"
+          data-category="musicals"
+          data-show="Big Fish"
+          data-directed=""
+          data-location=""
+          data-date=""
+          data-role=""
+          data-notes="Details coming soon."
+          data-cover="../assets/Big%20Fish/Cover%20Photo.png"
+          data-gallery="../pages/big-fish.html"
+          href="../pages/big-fish.html"
+          aria-label="Big Fish project details"
+        >
           <img src="../assets/Big%20Fish/Cover%20Photo.png" alt="Big Fish — cover photo">
         </a>
 
-        <a class="portfolio-card" data-category="plays">
-          <img src="../assets/images/work-1.jpg" alt="Work 2">
+        <a
+          class="portfolio-card"
+          data-category="plays"
+          data-show="Noises Off by Michael Frayn"
+          data-directed="Valerie Flower"
+          data-location="McInnis Hall at Eastern University"
+          data-date="November, 2024"
+          data-role="Composer"
+          data-notes="My score for Noises Off by Michael Frayn was built around two parallel ideas: 1980s-style lounge music alongside groove-driven funk. I was interested in letting those styles sit next to each other rather than fully blending them, reflecting the layered structure of the play itself. The lounge material carries a polished, almost overly composed quality--smooth harmonies, bright synth textures, and a sense of surface-level control. Alongside it, the funk elements bring rhythmic momentum and syncopated energy, adding movement and tension underneath that polished exterior. As the production within the play begins to fall apart, the music follows. Grooves start to fragment, harmonies lose their stability, and earlier themes return in altered or slightly distorted forms. What begins as confident and cohesive gradually unravels, mirroring the escalating chaos onstage."
+          data-cover="../assets/Noises%20Off/Cover%20Image.png"
+          data-gallery="../pages/noises-off.html"
+          href="../pages/noises-off.html"
+          aria-label="Noises Off project details"
+        >
+          <img src="../assets/Noises%20Off/Cover%20Image.png" alt="Noises Off — cover photo">
         </a>
 
-        <a class="portfolio-card" data-category="songs">
+        <a
+          class="portfolio-card"
+          data-category="songs"
+          data-show="Work 3"
+          data-directed=""
+          data-location=""
+          data-date=""
+          data-role=""
+          data-notes="Details coming soon."
+          data-cover="../assets/images/work-1.jpg"
+          data-gallery="../assets/images/work-1.jpg"
+          href="../assets/images/work-1.jpg"
+          aria-label="Work 3 project details"
+        >
           <img src="../assets/images/work-1.jpg" alt="Work 3">
         </a>
       </div>
     </div>
   </section>
 </main>
+
+<div class="portfolio-modal" id="portfolio-modal" aria-hidden="true">
+  <div class="portfolio-modal-overlay" data-modal-close></div>
+  <div class="portfolio-modal-card" role="dialog" aria-modal="true" aria-labelledby="portfolio-modal-title">
+    <button class="portfolio-modal-close" type="button" data-modal-close aria-label="Close project details">&times;</button>
+    <img class="portfolio-modal-cover" id="portfolio-modal-cover" alt="" />
+    <h2 class="portfolio-modal-title" id="portfolio-modal-title"></h2>
+    <div class="portfolio-modal-meta" id="portfolio-modal-meta"></div>
+    <p class="portfolio-modal-notes" id="portfolio-modal-notes"></p>
+    <a class="portfolio-modal-cta btn" id="portfolio-modal-cta" href="#" target="_self">Go to gallery</a>
+  </div>
+</div>
 
 <div data-include="footer"></div>
 

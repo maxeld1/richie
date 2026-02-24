@@ -1182,6 +1182,127 @@ body.no-scroll{ overflow: hidden !important; }
   }
 }
 
+/* ---- Portfolio Modal ---- */
+.portfolio-modal{
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 9999;
+}
+
+.portfolio-modal.is-open{
+  display: flex;
+}
+
+.portfolio-modal-overlay{
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.62);
+}
+
+.portfolio-modal-card{
+  position: relative;
+  z-index: 1;
+  width: min(900px, 100%);
+  background: #0b0b0b;
+  border: 1px solid rgba(255,255,255,.12);
+  padding: clamp(22px, 4vw, 36px);
+  box-shadow: 0 30px 90px rgba(0,0,0,.45);
+}
+
+.portfolio-modal-cover{
+  width: clamp(120px, 24vw, 180px);
+  height: clamp(120px, 24vw, 180px);
+  object-fit: cover;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: block;
+  border: 0;
+}
+
+.portfolio-modal-close{
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  background: transparent;
+  border: 0;
+  color: #fff;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.portfolio-modal-title{
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  margin: 0 0 18px;
+}
+
+.portfolio-modal-meta{
+  display: grid;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.portfolio-modal-row{
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+.portfolio-modal-key{
+  font-weight: 800;
+  color: rgba(255,255,255,.85);
+}
+
+.portfolio-modal-value{
+  color: rgba(255,255,255,.92);
+}
+
+.portfolio-modal-notes{
+  color: rgba(255,255,255,.8);
+  line-height: 1.6;
+  margin: 0 0 22px;
+}
+
+.portfolio-modal-cta{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 26px;
+  background: var(--green);
+  color: #fff;
+  border: 1px solid var(--green);
+  border-radius: 0;
+  font-weight: 800;
+  letter-spacing: .02em;
+}
+
+@media (max-width: 720px){
+  .portfolio-modal-card{
+    padding: 20px;
+  }
+
+  .portfolio-modal-cover{
+    position: static;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    margin-bottom: 16px;
+  }
+
+  .portfolio-modal-row{
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+}
+
 /* -------------------- 16) Project Page -------------------- */
 .project-hero{
   padding: clamp(64px, 7vw, 110px) 0 22px;
@@ -1202,6 +1323,15 @@ body.no-scroll{ overflow: hidden !important; }
   letter-spacing: -0.03em;
   font-size: clamp(2.6rem, 6vw, 4.3rem);
   margin: 0 0 14px;
+}
+
+.project-cover{
+  width: min(280px, 62vw);
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+  margin: 16px auto 20px;
+  border: 0;
 }
 
 .project-subtitle{
@@ -1244,6 +1374,92 @@ body.no-scroll{ overflow: hidden !important; }
   object-fit: contain;
   display: block;
   background: #000;
+}
+
+.project-audio-grid{
+  display: grid;
+  gap: 12px;
+  max-width: 980px;
+  margin: 0 auto;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.project-audio-card{
+  background: #0b0b0b;
+  border: 1px solid rgba(255,255,255,.10);
+  padding: 12px 14px;
+}
+
+.project-audio-title{
+  font-weight: 800;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  letter-spacing: .01em;
+}
+
+.project-audio-controls{
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.project-audio-btn{
+  background: var(--green);
+  color: #fff;
+  border: 1px solid var(--green);
+  font-weight: 800;
+  letter-spacing: .02em;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.project-audio-btn.is-playing{
+  background: transparent;
+  color: #fff;
+}
+
+.project-audio-bar{
+  position: relative;
+  height: 6px;
+  background: rgba(255,255,255,.12);
+  border-radius: 999px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.project-audio-progress{
+  position: absolute;
+  inset: 0;
+  width: 0%;
+  background: var(--green);
+}
+
+.project-audio-time{
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,.8);
+  min-width: 44px;
+  text-align: right;
+}
+
+.project-audio-card audio{
+  display: none;
+}
+
+@media (min-width: 820px){
+  .project-audio-grid .project-audio-card:last-child{
+    grid-column: 1 / -1;
+    justify-self: center;
+    max-width: 440px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 680px){
+  .project-audio-grid{
+    grid-template-columns: 1fr;
+  }
 }
 
 

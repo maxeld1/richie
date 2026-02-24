@@ -281,6 +281,203 @@ window.addEventListener("load", () => {
   initPortfolioFilters();
 });
 
+function initPortfolioModal() {
+  const modal = document.getElementById("portfolio-modal");
+  if (!modal) return;
+
+  const cards = Array.from(document.querySelectorAll(".portfolio-card"));
+  if (!cards.length) return;
+
+  const titleEl = document.getElementById("portfolio-modal-title");
+  const metaEl = document.getElementById("portfolio-modal-meta");
+  const notesEl = document.getElementById("portfolio-modal-notes");
+  const ctaEl = document.getElementById("portfolio-modal-cta");
+  const coverEl = document.getElementById("portfolio-modal-cover");
+  const closeBtn = modal.querySelector(".portfolio-modal-close");
+  const closeEls = Array.from(modal.querySelectorAll("[data-modal-close]"));
+
+  let lastFocus = null;
+
+  function buildMetaRow(label, value) {
+    if (!value) return null;
+    const row = document.createElement("div");
+    row.className = "portfolio-modal-row";
+    const key = document.createElement("span");
+    key.className = "portfolio-modal-key";
+    key.textContent = label;
+    const val = document.createElement("span");
+    val.className = "portfolio-modal-value";
+    val.textContent = value;
+    row.appendChild(key);
+    row.appendChild(val);
+    return row;
+  }
+
+  function open(card) {
+    const data = card.dataset || {};
+    const title = data.show || card.getAttribute("aria-label") || "Project Details";
+
+    if (titleEl) titleEl.textContent = title;
+
+    if (coverEl) {
+      if (data.cover) {
+        coverEl.src = data.cover;
+        coverEl.alt = title;
+        coverEl.style.display = "block";
+      } else {
+        coverEl.removeAttribute("src");
+        coverEl.alt = "";
+        coverEl.style.display = "none";
+      }
+    }
+
+    if (metaEl) {
+      metaEl.innerHTML = "";
+      const rows = [
+        buildMetaRow("Directed By", data.directed),
+        buildMetaRow("Location", data.location),
+        buildMetaRow("Date", data.date),
+        buildMetaRow("Role", data.role),
+      ].filter(Boolean);
+      rows.forEach((row) => metaEl.appendChild(row));
+      metaEl.style.display = rows.length ? "grid" : "none";
+    }
+
+    if (notesEl) {
+      if (data.notes) {
+        notesEl.textContent = data.notes;
+        notesEl.style.display = "block";
+      } else {
+        notesEl.textContent = "";
+        notesEl.style.display = "none";
+      }
+    }
+
+    if (ctaEl) {
+      if (data.gallery) {
+        ctaEl.href = data.gallery;
+        ctaEl.style.display = "inline-flex";
+      } else {
+        ctaEl.removeAttribute("href");
+        ctaEl.style.display = "none";
+      }
+    }
+
+    lastFocus = document.activeElement;
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("no-scroll");
+    if (closeBtn) closeBtn.focus();
+  }
+
+  function close() {
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("no-scroll");
+    if (lastFocus && typeof lastFocus.focus === "function") {
+      lastFocus.focus();
+    }
+  }
+
+  cards.forEach((card) => {
+    card.addEventListener("click", (e) => {
+      e.preventDefault();
+      open(card);
+    });
+  });
+
+  closeEls.forEach((el) => {
+    el.addEventListener("click", (e) => {
+      e.preventDefault();
+      close();
+    });
+  });
+
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("is-open")) {
+      close();
+    }
+  });
+}
+
+window.addEventListener("load", () => {
+  initPortfolioModal();
+});
+
+function initAudioPlayers() {
+  const cards = Array.from(document.querySelectorAll("[data-audio-card]"));
+  if (!cards.length) return;
+
+  function formatTime(time) {
+    if (!Number.isFinite(time)) return "0:00";
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+  }
+
+  function pauseAll(except) {
+    cards.forEach((card) => {
+      const audio = card.querySelector("[data-audio]");
+      const btn = card.querySelector("[data-audio-toggle]");
+      if (!audio || !btn || audio === except) return;
+      audio.pause();
+      btn.textContent = "Play";
+      btn.classList.remove("is-playing");
+    });
+  }
+
+  cards.forEach((card) => {
+    const audio = card.querySelector("[data-audio]");
+    const btn = card.querySelector("[data-audio-toggle]");
+    const bar = card.querySelector("[data-audio-bar]");
+    const progress = card.querySelector("[data-audio-progress]");
+    const timeEl = card.querySelector("[data-audio-time]");
+
+    if (!audio || !btn || !bar || !progress || !timeEl) return;
+
+    btn.addEventListener("click", () => {
+      if (audio.paused) {
+        pauseAll(audio);
+        audio.play();
+        btn.textContent = "Pause";
+        btn.classList.add("is-playing");
+      } else {
+        audio.pause();
+        btn.textContent = "Play";
+        btn.classList.remove("is-playing");
+      }
+    });
+
+    audio.addEventListener("timeupdate", () => {
+      const pct = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
+      progress.style.width = `${pct}%`;
+      timeEl.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+    });
+
+    audio.addEventListener("loadedmetadata", () => {
+      timeEl.textContent = `0:00 / ${formatTime(audio.duration)}`;
+    });
+
+    audio.addEventListener("ended", () => {
+      btn.textContent = "Play";
+      btn.classList.remove("is-playing");
+      progress.style.width = "0%";
+      timeEl.textContent = `0:00 / ${formatTime(audio.duration)}`;
+    });
+
+    bar.addEventListener("click", (e) => {
+      if (!audio.duration) return;
+      const rect = bar.getBoundingClientRect();
+      const pct = (e.clientX - rect.left) / rect.width;
+      audio.currentTime = Math.max(0, Math.min(1, pct)) * audio.duration;
+    });
+  });
+}
+
+window.addEventListener("load", () => {
+  initAudioPlayers();
+});
+
 function initHomeScrollReveal() {
   const body = document.body;
   if (!body.classList.contains("page-home")) return;
