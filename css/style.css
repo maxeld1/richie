@@ -1272,8 +1272,12 @@ body.no-scroll{ overflow: hidden !important; }
 }
 
 .portfolio-modal-key{
-  font-weight: 800;
-  color: rgba(255,255,255,.85);
+  font-weight: 900;
+  color: #fff;
+  font-size: 1.02rem;
+  font-family: Futura, serif;
+  text-transform: uppercase;
+  letter-spacing: .01em;
 }
 
 .portfolio-modal-value{
