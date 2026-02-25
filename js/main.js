@@ -195,7 +195,7 @@ function initHeroSlider() {
   }
 
   function initReveals() {
-    const els = document.querySelectorAll(".fade-up, .fade-line, .reveal");
+    const els = document.querySelectorAll(".fade-up, .fade-line, .reveal, .fan-item");
     if (!els.length) return;
 
     // Apply stagger delays (for fade-line groups)
