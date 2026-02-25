@@ -195,7 +195,7 @@ function initHeroSlider() {
   }
 
   function initReveals() {
-    const els = document.querySelectorAll(".fade-up, .fade-line, .reveal, .fan-item");
+    const els = document.querySelectorAll(".fade-up, .fade-line:not(.fan-trigger), .reveal");
     if (!els.length) return;
 
     // Apply stagger delays (for fade-line groups)
@@ -224,6 +224,60 @@ function initHeroSlider() {
     setTimeout(initReveals, 700);
   });
 })();
+
+function initHomeFanOnTrigger() {
+  const body = document.body;
+  if (!body.classList.contains("page-home")) return;
+
+  const trigger = document.querySelector(".fan-trigger");
+  const items = Array.from(document.querySelectorAll(".fan-item"));
+  if (!trigger || !items.length) return;
+
+  if (!("IntersectionObserver" in window)) {
+    items.forEach((item) => item.classList.add("is-visible"));
+    return;
+  }
+
+  const itemObserver = new IntersectionObserver((entries, obs) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("is-visible");
+      obs.unobserve(entry.target);
+    });
+  }, { threshold: 0.3, rootMargin: "0px 0px -10% 0px" });
+
+  const triggerObserver = new IntersectionObserver((entries, obs) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      trigger.classList.add("is-visible");
+
+      const parseTime = (val) => {
+        const v = val.trim();
+        if (v.endsWith("ms")) return parseFloat(v);
+        if (v.endsWith("s")) return parseFloat(v) * 1000;
+        return parseFloat(v) || 0;
+      };
+
+      const style = window.getComputedStyle(trigger);
+      const durations = style.transitionDuration.split(",").map(parseTime);
+      const delays = style.transitionDelay.split(",").map(parseTime);
+      const maxDur = Math.max(...durations, 0);
+      const maxDelay = Math.max(...delays, 0);
+      const wait = maxDur + maxDelay;
+
+      setTimeout(() => {
+        items.forEach((item) => itemObserver.observe(item));
+      }, Math.max(wait, 600));
+      obs.disconnect();
+    });
+  }, { threshold: 0.35, rootMargin: "0px 0px -10% 0px" });
+
+  triggerObserver.observe(trigger);
+}
+
+window.addEventListener("load", () => {
+  initHomeFanOnTrigger();
+});
 
 /**
  * IMPORTANT:

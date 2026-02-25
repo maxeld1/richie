@@ -572,19 +572,24 @@ body.no-scroll{ overflow: hidden !important; }
     opacity: 0;
     transform: translateY(48px) rotate(-6deg) scale(0.98);
     transition: transform 1s var(--ease), opacity 1s var(--ease);
+    transition-delay: 0s;
+    pointer-events: none;
   }
 
   .page-home .gallery .fan-item:nth-child(2){
     transform: translateY(56px) rotate(2deg) scale(0.98);
+    transition-delay: .15s;
   }
 
   .page-home .gallery .fan-item:nth-child(3){
     transform: translateY(64px) rotate(8deg) scale(0.98);
+    transition-delay: .3s;
   }
 
   .page-home .gallery .fan-item.is-visible{
     opacity: 1;
     transform: translateY(0) rotate(0deg) scale(1);
+    pointer-events: auto;
   }
 }
 
@@ -863,6 +868,8 @@ body.no-scroll{ overflow: hidden !important; }
   color: rgba(255,255,255,.85);
   font-weight: 700;
   font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
 }
 
 /* -------------------- 12) Utilities -------------------- */
