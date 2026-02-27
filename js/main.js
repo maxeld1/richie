@@ -195,7 +195,7 @@ function initHeroSlider() {
   }
 
   function initReveals() {
-    const els = document.querySelectorAll(".fade-up, .fade-line:not(.fan-trigger), .reveal");
+    const els = document.querySelectorAll(".fade-up, .fade-line, .reveal");
     if (!els.length) return;
 
     // Apply stagger delays (for fade-line groups)
@@ -603,23 +603,12 @@ window.addEventListener("load", () => {
   initGalleryLightbox();
 });
 
-function initHomeScrollReveal() {
+function initHomeReady() {
   const body = document.body;
   if (!body.classList.contains("page-home")) return;
-
   body.classList.add("home-ready");
-
-  const onScroll = () => {
-    if (window.scrollY > 10) {
-      body.classList.add("has-scrolled");
-      window.removeEventListener("scroll", onScroll);
-    }
-  };
-
-  onScroll();
-  window.addEventListener("scroll", onScroll, { passive: true });
 }
 
 window.addEventListener("load", () => {
-  initHomeScrollReveal();
+  initHomeReady();
 });

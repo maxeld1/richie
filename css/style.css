@@ -1266,6 +1266,10 @@ body.no-scroll{ overflow: hidden !important; }
   border: 0;
 }
 
+.portfolio-modal-cover-wrap{
+  width: 100%;
+}
+
 .portfolio-modal-close{
   position: absolute;
   top: 14px;
@@ -1357,23 +1361,84 @@ body.no-scroll{ overflow: hidden !important; }
     padding: 16px;
   }
 
+  .portfolio-modal.has-cover .portfolio-modal-card{
+    padding-right: 18px;
+  }
+
+  .portfolio-modal.has-cover .portfolio-modal-notes,
+  .portfolio-modal.has-cover .portfolio-modal-actions{
+    margin-right: 0;
+  }
+
   .portfolio-modal-card{
-    padding: 20px;
+    padding: 18px;
     width: 100%;
     max-height: calc(100vh - 32px);
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
   }
 
   .portfolio-modal-cover{
     position: static;
-    width: 100%;
+    width: min(240px, 70vw);
     height: auto;
     aspect-ratio: 1 / 1;
-    margin-bottom: 16px;
+    margin: 0 auto 14px;
+    display: block;
+    align-self: center;
+  }
+
+  .portfolio-modal-cover-wrap{
+    display: flex;
+    justify-content: center;
+  }
+
+  .portfolio-modal-title{
+    font-size: 1.3rem;
+    margin-bottom: 14px;
+    white-space: nowrap;
+  }
+
+  .portfolio-modal-meta{
+    gap: 12px;
+    width: 100%;
+    justify-items: stretch;
+  }
+
+  .portfolio-modal-key{
+    font-size: 0.82rem;
+    letter-spacing: .08em;
+    white-space: nowrap;
+  }
+
+  .portfolio-modal-value{
+    font-size: 0.95rem;
+  }
+
+  .portfolio-modal-notes{
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  .portfolio-modal-actions{
+    gap: 10px;
   }
 
   .portfolio-modal-row{
+    display: grid;
     grid-template-columns: 1fr;
     gap: 6px;
+    width: 100%;
+  }
+
+  .portfolio-modal-value{
+    font-size: clamp(0.78rem, 2.6vw, 0.88rem);
+    white-space: normal;
+    display: block;
+    width: 100%;
+    max-width: 100%;
   }
 }
 
@@ -1656,16 +1721,17 @@ body.no-scroll{ overflow: hidden !important; }
   transform: translateY(12px) !important;
 }
 
+.page-home .hero-lines .fade-line.is-visible{
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
 .page-home.home-ready .hero-lines .fade-line:first-child{
   opacity: 1 !important;
   transform: none !important;
   transition: opacity 1.2s var(--ease), transform 1.2s var(--ease);
 }
 
-.page-home.has-scrolled .hero-lines .lead.fade-line{
-  opacity: 1 !important;
-  transform: translateY(0) !important;
-}
 
 .fade-line{
   display: inline-block;
