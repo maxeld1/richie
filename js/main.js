@@ -348,9 +348,23 @@ function initPortfolioModal() {
   const ctaEl = document.getElementById("portfolio-modal-cta");
   const coverEl = document.getElementById("portfolio-modal-cover");
   const closeBtn = modal.querySelector(".portfolio-modal-close");
+  const prevBtn = modal.querySelector("[data-modal-prev]");
+  const nextBtn = modal.querySelector("[data-modal-next]");
   const closeEls = Array.from(modal.querySelectorAll("[data-modal-close]"));
 
   let lastFocus = null;
+  let currentCard = null;
+
+  function getVisibleCards() {
+    return cards.filter((card) => !card.classList.contains("is-hidden"));
+  }
+
+  function updateNavButtons() {
+    const visibleCards = getVisibleCards();
+    const disableNav = visibleCards.length <= 1;
+    if (prevBtn) prevBtn.disabled = disableNav;
+    if (nextBtn) nextBtn.disabled = disableNav;
+  }
 
   function buildMetaRow(label, value) {
     if (!value) return null;
@@ -370,6 +384,7 @@ function initPortfolioModal() {
   function open(card) {
     const data = card.dataset || {};
     const title = data.show || card.getAttribute("aria-label") || "Project Details";
+    currentCard = card;
 
     if (titleEl) titleEl.textContent = title;
 
@@ -423,6 +438,7 @@ function initPortfolioModal() {
     modal.classList.add("is-open");
     modal.setAttribute("aria-hidden", "false");
     document.body.classList.add("no-scroll");
+    updateNavButtons();
     if (closeBtn) closeBtn.focus();
   }
 
@@ -430,9 +446,20 @@ function initPortfolioModal() {
     modal.classList.remove("is-open");
     modal.setAttribute("aria-hidden", "true");
     document.body.classList.remove("no-scroll");
+    currentCard = null;
     if (lastFocus && typeof lastFocus.focus === "function") {
       lastFocus.focus();
     }
+  }
+
+  function navigate(step) {
+    if (!currentCard) return;
+    const visibleCards = getVisibleCards();
+    if (!visibleCards.length) return;
+    const currentIndex = visibleCards.indexOf(currentCard);
+    const safeIndex = currentIndex >= 0 ? currentIndex : 0;
+    const nextIndex = (safeIndex + step + visibleCards.length) % visibleCards.length;
+    open(visibleCards[nextIndex]);
   }
 
   cards.forEach((card) => {
@@ -449,9 +476,37 @@ function initPortfolioModal() {
     });
   });
 
+  if (prevBtn) {
+    prevBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      navigate(-1);
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      navigate(1);
+    });
+  }
+
   window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && modal.classList.contains("is-open")) {
+    if (!modal.classList.contains("is-open")) return;
+
+    if (e.key === "Escape") {
       close();
+      return;
+    }
+
+    if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      navigate(-1);
+      return;
+    }
+
+    if (e.key === "ArrowRight") {
+      e.preventDefault();
+      navigate(1);
     }
   });
 }
