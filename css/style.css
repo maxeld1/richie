@@ -1393,21 +1393,24 @@ body.no-scroll{ overflow: hidden !important; }
 @media (max-width: 720px){
   .portfolio-modal{
     align-items: flex-start;
-    padding: 16px;
+    padding: 16px 16px 82px;
   }
 
   .portfolio-modal-arrow{
-    width: 32px;
-    height: 32px;
-    font-size: 34px;
+    width: 44px;
+    height: 44px;
+    font-size: 38px;
+    top: auto;
+    bottom: 20px;
+    transform: none;
   }
 
   .portfolio-modal-arrow--prev{
-    left: 8px;
+    left: calc(50% - 60px);
   }
 
   .portfolio-modal-arrow--next{
-    right: 8px;
+    right: calc(50% - 60px);
   }
 
   .portfolio-modal.has-cover .portfolio-modal-card{
@@ -1422,7 +1425,7 @@ body.no-scroll{ overflow: hidden !important; }
   .portfolio-modal-card{
     padding: 18px;
     width: 100%;
-    max-height: calc(100vh - 32px);
+    max-height: calc(100vh - 98px);
     text-align: left;
     display: flex;
     flex-direction: column;
