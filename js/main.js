@@ -343,6 +343,7 @@ function initPortfolioModal() {
   if (!cards.length) return;
 
   const titleEl = document.getElementById("portfolio-modal-title");
+  const subtitleEl = document.getElementById("portfolio-modal-subtitle");
   const metaEl = document.getElementById("portfolio-modal-meta");
   const notesEl = document.getElementById("portfolio-modal-notes");
   const ctaEl = document.getElementById("portfolio-modal-cta");
@@ -387,6 +388,15 @@ function initPortfolioModal() {
     currentCard = card;
 
     if (titleEl) titleEl.textContent = title;
+    if (subtitleEl) {
+      if (data.subtitle) {
+        subtitleEl.textContent = data.subtitle;
+        subtitleEl.style.display = "block";
+      } else {
+        subtitleEl.textContent = "";
+        subtitleEl.style.display = "none";
+      }
+    }
 
     if (coverEl) {
       if (data.cover) {
