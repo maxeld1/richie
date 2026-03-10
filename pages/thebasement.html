@@ -1,10 +1,73 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Basement — Richie Izzo</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    body{
+      --spotlight-x: 50vw;
+      --spotlight-y: 50vh;
+      --spotlight-size: 0px;
+      position: relative;
+      margin: 0;
+      min-height: 100vh;
+      background: #000;
+    }
+
+    body::before{
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: url("../assets/The%20Basement/Page%20Background%20Photo.png") center center / cover no-repeat;
+      opacity: 1;
+      -webkit-mask-image: radial-gradient(
+        circle var(--spotlight-size) at var(--spotlight-x) var(--spotlight-y),
+        #000 65%,
+        transparent 100%
+      );
+      mask-image: radial-gradient(
+        circle var(--spotlight-size) at var(--spotlight-x) var(--spotlight-y),
+        #000 65%,
+        transparent 100%
+      );
+      transition: -webkit-mask-image 120ms linear, mask-image 120ms linear;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .thebasement-actions{
+      position: relative;
+      z-index: 1;
+      padding: 24px;
+    }
+  </style>
 </head>
 <body>
+  <div class="thebasement-actions">
+    <a class="project-back" href="../index.html" aria-label="Back to homepage">Back to Homepage</a>
+  </div>
+  <script>
+    const body = document.body;
+    const SPOTLIGHT_ACTIVE_SIZE = "50px";
+    const SPOTLIGHT_INACTIVE_SIZE = "0px";
 
+    const deactivateSpotlight = () => {
+      body.style.setProperty("--spotlight-size", SPOTLIGHT_INACTIVE_SIZE);
+    };
+
+    document.addEventListener("pointermove", (event) => {
+      body.style.setProperty("--spotlight-x", `${event.clientX}px`);
+      body.style.setProperty("--spotlight-y", `${event.clientY}px`);
+      body.style.setProperty("--spotlight-size", SPOTLIGHT_ACTIVE_SIZE);
+    });
+
+    window.addEventListener("mouseout", (event) => {
+      if (!event.relatedTarget && !event.toElement) deactivateSpotlight();
+    });
+
+    window.addEventListener("blur", deactivateSpotlight);
+  </script>
 </body>
 </html>
