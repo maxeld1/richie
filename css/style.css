@@ -516,10 +516,18 @@ body.no-scroll{ overflow: hidden !important; }
 
 /* -------------------- Gallery (edge-to-edge squares) -------------------- */
 .gallery{
+  --home-gallery-columns: 3;
+  --home-gallery-gap: 0px;
   margin-top: 28px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0;                 /* edge-to-edge */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--home-gallery-gap); /* edge-to-edge */
+}
+
+.gallery > a{
+  flex: 0 1 calc((100% - (var(--home-gallery-gap) * (var(--home-gallery-columns) - 1))) / var(--home-gallery-columns));
+  max-width: calc((100% - (var(--home-gallery-gap) * (var(--home-gallery-columns) - 1))) / var(--home-gallery-columns));
 }
 
 .portfolio-card,
@@ -539,10 +547,14 @@ body.no-scroll{ overflow: hidden !important; }
 }
 
 @media (max-width:900px){
-  .gallery{ grid-template-columns: repeat(2, 1fr); }
+  .gallery{
+    --home-gallery-columns: 2;
+  }
 }
 @media (max-width:560px){
-  .gallery{ grid-template-columns: 1fr; }
+  .gallery{
+    --home-gallery-columns: 1;
+  }
 }
 
 /* square tiles */
@@ -1153,9 +1165,11 @@ body.no-scroll{ overflow: hidden !important; }
 }
 
 .portfolio-grid{
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 420px));
-  gap: 44px; /* matches the “breathing room” in your screenshot */
+  --portfolio-columns: 3;
+  --portfolio-gap: 44px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--portfolio-gap); /* matches the “breathing room” in your screenshot */
   margin-top: 34px;
   justify-content: center;
 }
@@ -1163,6 +1177,14 @@ body.no-scroll{ overflow: hidden !important; }
 .portfolio-card{
   display: block;
   background: #000;
+}
+
+.portfolio-grid > .portfolio-card{
+  flex: 0 1 min(
+    420px,
+    calc((100% - (var(--portfolio-gap) * (var(--portfolio-columns) - 1))) / var(--portfolio-columns))
+  );
+  width: 100%;
 }
 
 .page-portfolio .portfolio-card img{
@@ -1191,8 +1213,8 @@ body.no-scroll{ overflow: hidden !important; }
 /* Responsive */
 @media (max-width: 980px){
   .portfolio-grid{
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 26px;
+    --portfolio-columns: 2;
+    --portfolio-gap: 26px;
   }
 
   .page-portfolio .portfolio-card{
@@ -1206,8 +1228,8 @@ body.no-scroll{ overflow: hidden !important; }
 
 @media (max-width: 620px){
   .portfolio-grid{
-    grid-template-columns: 1fr;
-    gap: 18px;
+    --portfolio-columns: 1;
+    --portfolio-gap: 18px;
   }
 }
 
