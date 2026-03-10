@@ -1295,8 +1295,8 @@ body.no-scroll{ overflow: hidden !important; }
   height: clamp(120px, 24vw, 180px);
   object-fit: cover;
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 50px;
+  right: 50px;
   display: block;
   border: 0;
 }
